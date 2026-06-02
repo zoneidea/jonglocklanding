@@ -2,9 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   ArrowRight,
   BadgeCheck,
-  BarChart3,
   Building2,
-  CalendarClock,
   CheckCircle2,
   ChartColumnIncreasing,
   CreditCard,
@@ -16,7 +14,6 @@ import {
   ReceiptText,
   ShieldCheck,
   Sparkles,
-  UsersRound,
 } from 'lucide-react';
 import jonglockLogoWhite from './assets/jonglock-logo-white.png';
 
@@ -358,7 +355,7 @@ export default function App() {
                 <span className="hero-dot bg-rose-400" />
               </div>
 
-              <div className="grid gap-4 lg:grid-cols-1 xl:grid-cols-[1.08fr_0.92fr]">
+              <div className="grid gap-4 lg:grid-cols-1">
                 <section className="hero-surface hero-surface-primary">
                   <div className="flex items-center justify-between">
                     <div>
@@ -371,7 +368,7 @@ export default function App() {
                   <div className="mt-6 grid gap-3">
                     <div className="rounded-2xl bg-white/6 p-4">
                       <div className="flex items-center justify-between">
-                        <p className="text-sm text-slate-300">อัตราการใช้งานบูธวันนี้</p>
+                        <p className="text-sm text-slate-300">อัตราการใช้บูธวันนี้</p>
                         <p className="text-sm font-semibold text-emerald-300">{overview?.occupancyRateToday ?? 0}%</p>
                       </div>
                       <div className="mt-3 h-2 rounded-full bg-white/8">
@@ -379,48 +376,41 @@ export default function App() {
                       </div>
                     </div>
 
-                    <div className="grid gap-3 md:grid-cols-2">
+                    <div className="grid gap-3 sm:grid-cols-3">
                       <div className="rounded-2xl bg-white/6 p-4">
-                        <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Active Booths</p>
-                        <p className="mt-3 text-sm text-slate-300">บูธเปิดใช้งาน</p>
-                        <p className="mt-1 text-4xl font-semibold text-white">{overview?.activeBooths ?? 0}</p>
+                        <p className="text-sm text-slate-300">บูธเปิดใช้งาน</p>
+                        <p className="mt-2 text-3xl font-semibold leading-none text-white">{overview?.activeBooths ?? 0}</p>
                       </div>
                       <div className="rounded-2xl bg-white/6 p-4">
-                        <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Collected Today</p>
-                        <p className="mt-3 text-sm text-slate-300">ยอดชำระวันนี้</p>
-                        <p className="mt-1 text-4xl font-semibold text-white">{paidAmountTodayLabel}</p>
+                        <p className="text-sm text-slate-300">ตลาดที่เปิดอยู่</p>
+                        <p className="mt-2 text-3xl font-semibold leading-none text-white">{overview?.activeMarkets ?? 0}</p>
+                      </div>
+                      <div className="rounded-2xl bg-white/6 p-4">
+                        <p className="text-sm text-slate-300">ยอดชำระวันนี้</p>
+                        <p className="mt-2 whitespace-nowrap text-3xl font-semibold leading-none text-white">{paidAmountTodayLabel}</p>
                       </div>
                     </div>
                   </div>
                 </section>
 
                 <section className="hero-surface hero-surface-secondary">
-                  <p className="text-sm uppercase tracking-[0.24em] text-slate-700">Subscription</p>
-                  <div className="mt-4 space-y-4">
-                    <div className="rounded-2xl bg-[var(--color-sand)] p-5 text-[var(--color-ink)]">
-                      <p className="text-sm">Free access</p>
-                      <p className="mt-2 text-3xl font-semibold">ใช้ฟรี 3 เดือน</p>
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-stretch">
+                    <div className="flex-1 rounded-2xl bg-[var(--color-sand)] p-5 text-[var(--color-ink)]">
+                      <p className="text-sm font-medium">เริ่มต้นใช้งาน</p>
+                      <p className="mt-2 whitespace-nowrap text-3xl font-semibold leading-tight">ใช้ฟรี 3 เดือน</p>
+                      <p className="mt-2 text-sm text-slate-700">เปิดระบบให้ทดลองใช้งานก่อนเริ่มคิดค่าบริการ</p>
                     </div>
-                    <div className="rounded-2xl border border-slate-200 p-4">
-                      <p className="text-sm font-medium text-slate-700">Live platform metrics</p>
-                      <ul className="mt-4 space-y-2.5 text-sm text-slate-700">
-                        <li className="flex items-start justify-between gap-4 rounded-xl bg-white/80 px-3 py-3">
-                          <span className="flex items-center gap-2 leading-6"><BarChart3 className="mt-1 h-4 w-4 shrink-0 text-[var(--color-accent)]" /> องค์กรที่เปิดใช้งาน</span>
-                          <strong className="text-base text-slate-950">{overview?.activeOrganizations ?? 0}</strong>
-                        </li>
-                        <li className="flex items-start justify-between gap-4 rounded-xl bg-white/80 px-3 py-3">
-                          <span className="flex items-center gap-2 leading-6"><UsersRound className="mt-1 h-4 w-4 shrink-0 text-[var(--color-accent)]" /> subscriptions ที่กำลังใช้งาน</span>
-                          <strong className="text-base text-slate-950">{overview?.activeSubscriptions ?? 0}</strong>
-                        </li>
-                        <li className="flex items-start justify-between gap-4 rounded-xl bg-white/80 px-3 py-3">
-                          <span className="flex items-center gap-2 leading-6"><MapPinned className="mt-1 h-4 w-4 shrink-0 text-[var(--color-accent)]" /> ตลาดที่เปิดอยู่</span>
-                          <strong className="text-base text-slate-950">{overview?.activeMarkets ?? 0}</strong>
-                        </li>
-                        <li className="flex items-start justify-between gap-4 rounded-xl bg-white/80 px-3 py-3">
-                          <span className="flex items-center gap-2 leading-6"><CalendarClock className="mt-1 h-4 w-4 shrink-0 text-[var(--color-accent)]" /> คำขอสมัครรอตรวจสอบ</span>
-                          <strong className="text-base text-slate-950">{overview?.pendingSignupRequests ?? 0}</strong>
-                        </li>
-                      </ul>
+                    <div className="grid min-w-0 flex-1 gap-3 sm:grid-cols-2">
+                      <div className="rounded-2xl border border-slate-200 bg-white/80 p-4">
+                        <Building2 className="h-5 w-5 text-[var(--color-accent)]" />
+                        <p className="mt-3 text-sm text-slate-600">องค์กรที่เปิดใช้งาน</p>
+                        <p className="mt-1 text-3xl font-semibold leading-none text-slate-950">{overview?.activeOrganizations ?? 0}</p>
+                      </div>
+                      <div className="rounded-2xl border border-slate-200 bg-white/80 p-4">
+                        <MapPinned className="h-5 w-5 text-[var(--color-accent)]" />
+                        <p className="mt-3 text-sm text-slate-600">ตลาดที่เปิดอยู่</p>
+                        <p className="mt-1 text-3xl font-semibold leading-none text-slate-950">{overview?.activeMarkets ?? 0}</p>
+                      </div>
                     </div>
                   </div>
                 </section>
