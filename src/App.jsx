@@ -9,7 +9,6 @@ import {
   Eye,
   EyeOff,
   Layers3,
-  MapPinned,
   PhoneCall,
   ReceiptText,
   ShieldCheck,
@@ -157,33 +156,6 @@ const audiences = [
   'องค์กรที่ดูแลหลายตลาดหรือหลายสาขา',
 ];
 
-const showcaseItems = [
-  {
-    title: 'หน้าเลือกตลาด',
-    description: 'ค้นหา เลือกตลาด และดูสถานะเปิดปิดได้จากแอปฯ',
-    image: '/showcase/app-market-list.png',
-    alt: 'หน้ารายการตลาดทั้งหมดในแอป Jonglock',
-  },
-  {
-    title: 'รายละเอียดตลาด',
-    description: 'แสดงภาพตลาด แกลเลอรี่ เวลาเปิดปิด และข้อมูลติดต่อก่อนจอง',
-    image: '/showcase/app-market-detail.png',
-    alt: 'หน้ารายละเอียดตลาดในแอป Jonglock',
-  },
-  {
-    title: 'ล็อกอินผู้ค้า',
-    description: 'รองรับผู้ค้าและเจ้าหน้าที่ตรวจสอบแยก flow กันชัดเจน',
-    image: '/showcase/app-login.png',
-    alt: 'หน้าล็อกอินผู้ค้าในแอป Jonglock',
-  },
-  {
-    title: 'Splash Screen',
-    description: 'ภาพแรกของแอปฯ ที่สื่อแบรนด์และความพร้อมใช้งาน',
-    image: '/showcase/app-splash.png',
-    alt: 'หน้าต้อนรับแอป Jonglock',
-  },
-];
-
 const productFlow = [
   {
     step: '01',
@@ -289,7 +261,6 @@ export default function App() {
   const [plans, setPlans] = useState([]);
   const [loadingPlans, setLoadingPlans] = useState(true);
   const [planError, setPlanError] = useState('');
-  const [overview, setOverview] = useState(null);
   const [form, setForm] = useState(initialForm);
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -302,10 +273,7 @@ export default function App() {
     async function loadData() {
       try {
         setLoadingPlans(true);
-        const [plansResponse, overviewResponse] = await Promise.all([
-          fetch(`${API_BASE_URL}/subscription/plans`),
-          fetch(`${API_BASE_URL}/subscription/overview`),
-        ]);
+        const plansResponse = await fetch(`${API_BASE_URL}/subscription/plans`);
 
         const plansPayload = await plansResponse.json();
         if (!plansResponse.ok || plansPayload.status !== 'success') {
@@ -319,13 +287,6 @@ export default function App() {
           preferredPlanCode: DEFAULT_PLAN_CODE,
           preferredBillingInterval: current.preferredBillingInterval || 'monthly',
         }));
-
-        if (overviewResponse.ok) {
-          const overviewPayload = await overviewResponse.json();
-          if (overviewPayload.status === 'success') {
-            setOverview(overviewPayload.data || null);
-          }
-        }
       } catch (requestError) {
         setPlanError(requestError.message || 'ไม่สามารถโหลดแผน subscription ได้');
       } finally {
@@ -412,11 +373,6 @@ export default function App() {
   }
 
   const selectedPlan = plans.find((plan) => plan.code === form.preferredPlanCode) || plans[0] || null;
-  const paidAmountTodayLabel = new Intl.NumberFormat('th-TH', {
-    style: 'currency',
-    currency: 'THB',
-    maximumFractionDigits: 0,
-  }).format(Number(overview?.paidAmountToday || 0));
 
   return (
     <div className="min-h-screen bg-[var(--color-ink)] text-slate-900">
@@ -512,72 +468,15 @@ export default function App() {
               </div>
             </div>
 
-            <div className="hero-panel">
-              <div className="hero-panel-header">
-                <span className="hero-dot bg-emerald-400" />
-                <span className="hero-dot bg-amber-400" />
-                <span className="hero-dot bg-rose-400" />
-              </div>
-
-              <div className="grid gap-4 lg:grid-cols-1">
-                <section className="hero-surface hero-surface-primary">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm uppercase tracking-[0.24em] text-slate-400">Operations</p>
-                      <h2 className="mt-2 text-2xl font-semibold text-white">ตลาดพร้อมเปิดจอง</h2>
-                    </div>
-                    <BadgeCheck className="h-8 w-8 text-[var(--color-accent)]" />
-                  </div>
-
-                  <div className="mt-6 grid gap-3">
-                    <div className="rounded-2xl bg-white/6 p-4">
-                      <div className="flex items-center justify-between">
-                        <p className="text-sm text-slate-300">อัตราการใช้บูธวันนี้</p>
-                        <p className="text-sm font-semibold text-emerald-300">{overview?.occupancyRateToday ?? 0}%</p>
-                      </div>
-                      <div className="mt-3 h-2 rounded-full bg-white/8">
-                        <div className="h-2 rounded-full bg-[var(--color-accent)] transition-all" style={{ width: `${overview?.occupancyRateToday ?? 0}%` }} />
-                      </div>
-                    </div>
-
-                    <div className="grid gap-3 sm:grid-cols-3">
-                      <div className="rounded-2xl bg-white/6 p-4">
-                        <p className="text-sm text-slate-300">บูธเปิดใช้งาน</p>
-                        <p className="mt-2 text-3xl font-semibold leading-none text-white">{overview?.activeBooths ?? 0}</p>
-                      </div>
-                      <div className="rounded-2xl bg-white/6 p-4">
-                        <p className="text-sm text-slate-300">ตลาดที่เปิดอยู่</p>
-                        <p className="mt-2 text-3xl font-semibold leading-none text-white">{overview?.activeMarkets ?? 0}</p>
-                      </div>
-                      <div className="rounded-2xl bg-white/6 p-4">
-                        <p className="text-sm text-slate-300">ยอดชำระวันนี้</p>
-                        <p className="mt-2 whitespace-nowrap text-3xl font-semibold leading-none text-white">{paidAmountTodayLabel}</p>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                <section className="hero-surface hero-surface-secondary">
-                  <div className="flex flex-col gap-4 sm:flex-row sm:items-stretch">
-                    <div className="flex-1 rounded-2xl bg-[var(--color-sand)] p-5 text-[var(--color-ink)]">
-                      <p className="text-sm font-medium">เริ่มต้นใช้งาน</p>
-                      <p className="mt-2 whitespace-nowrap text-3xl font-semibold leading-tight">ใช้ฟรี 3 เดือน</p>
-                      <p className="mt-2 text-sm text-slate-700">เปิดระบบให้ทดลองใช้งานก่อนเริ่มคิดค่าบริการ</p>
-                    </div>
-                    <div className="grid min-w-0 flex-1 gap-3 sm:grid-cols-2">
-                      <div className="rounded-2xl border border-slate-200 bg-white/80 p-4">
-                        <Building2 className="h-5 w-5 text-[var(--color-accent)]" />
-                        <p className="mt-3 text-sm text-slate-600">องค์กรที่เปิดใช้งาน</p>
-                        <p className="mt-1 text-3xl font-semibold leading-none text-slate-950">{overview?.activeOrganizations ?? 0}</p>
-                      </div>
-                      <div className="rounded-2xl border border-slate-200 bg-white/80 p-4">
-                        <MapPinned className="h-5 w-5 text-[var(--color-accent)]" />
-                        <p className="mt-3 text-sm text-slate-600">ตลาดที่เปิดอยู่</p>
-                        <p className="mt-1 text-3xl font-semibold leading-none text-slate-950">{overview?.activeMarkets ?? 0}</p>
-                      </div>
-                    </div>
-                  </div>
-                </section>
+            <div className="relative">
+              <div className="absolute -inset-6 rounded-[2.75rem] bg-[radial-gradient(circle_at_60%_20%,rgba(143,224,212,0.24),transparent_34rem)] blur-2xl" />
+              <div className="relative overflow-hidden rounded-[2rem] border border-white/12 bg-white/8 p-3 shadow-[0_32px_110px_rgba(1,8,20,0.34)] backdrop-blur-xl">
+                <img
+                  src="/hero/jonglock-product-hero.png"
+                  alt="Jonglock ระบบจองพื้นที่ขายสำหรับพ่อค้าแม่ค้า"
+                  className="aspect-[16/9] w-full rounded-[1.45rem] object-cover object-center"
+                  fetchPriority="high"
+                />
               </div>
             </div>
           </div>
@@ -606,51 +505,6 @@ export default function App() {
                 ))}
               </div>
             </div>
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-7xl px-5 py-14 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-            <div>
-              <p className="section-kicker">Product preview</p>
-              <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-white lg:text-4xl">
-                เห็นภาพระบบจริงก่อนเริ่มใช้งาน
-              </h2>
-              <p className="mt-4 max-w-2xl text-base leading-8 text-slate-300">
-                ตัวอย่างหน้าจอจากระบบจัดการและแอปฯ ช่วยให้ทีมเห็นภาพตั้งแต่ dashboard,
-                รายการตลาด ไปจนถึงหน้ารายละเอียดก่อนเข้าสู่ขั้นตอนจองพื้นที่
-              </p>
-            </div>
-            <div className="rounded-[2rem] border border-white/10 bg-white/8 p-3 shadow-[0_24px_80px_rgba(1,8,20,0.26)] backdrop-blur-xl">
-              <img
-                src="/showcase/management-dashboard.png"
-                alt="Dashboard ระบบจัดการตลาด Jonglock"
-                className="h-auto w-full rounded-[1.5rem] object-cover"
-                loading="lazy"
-              />
-            </div>
-          </div>
-
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {showcaseItems.map((item) => (
-              <article
-                key={item.title}
-                className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/8 shadow-[0_18px_54px_rgba(1,8,20,0.2)] backdrop-blur-xl"
-              >
-                <div className="bg-slate-950/40 p-3">
-                  <img
-                    src={item.image}
-                    alt={item.alt}
-                    className="aspect-[9/16] w-full rounded-[1.25rem] object-cover object-top"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-5">
-                  <h3 className="text-lg font-semibold text-white">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">{item.description}</p>
-                </div>
-              </article>
-            ))}
           </div>
         </section>
 
