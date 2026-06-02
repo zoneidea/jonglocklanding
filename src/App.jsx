@@ -18,7 +18,14 @@ import {
 import jonglockLogoWhite from './assets/jonglock-logo-white.png';
 
 const API_BASE_URL = import.meta.env.VITE_PUBLIC_API_BASE_URL || 'https://jonglockapi.zonedevnode.com/api/public';
-const MANAGEMENT_APP_URL = import.meta.env.VITE_MANAGEMENT_APP_URL || 'https://jonglockmng.zonedevnode.com';
+const MANAGEMENT_APP_URL = import.meta.env.VITE_MANAGEMENT_APP_URL || 'https://management.jonglock.com';
+const DEMO_MANAGEMENT_APP_URL = import.meta.env.VITE_DEMO_MANAGEMENT_APP_URL || 'https://jonglockmng.zonedevnode.com';
+const DEMO_LOGIN_URL = `${DEMO_MANAGEMENT_APP_URL.replace(/\/$/, '')}/login?organizationCode=ORG001&username=admin`;
+const DEMO_ACCOUNT = {
+  organizationCode: 'ORG001',
+  username: 'admin',
+  password: 'Admin@123456',
+};
 const PASSWORD_POLICY = 'รหัสผ่านต้องมีอย่างน้อย 10 ตัวอักษร มีตัวพิมพ์ใหญ่ 1 ตัว ตัวเลข 1 ตัว และอักขระพิเศษ 1 ตัว';
 const DEFAULT_PLAN_CODE = 'free_full_1y';
 const DEFAULT_TRIAL_DAYS = 90;
@@ -459,6 +466,22 @@ export default function App() {
                 >
                   ดูระบบจัดการ
                 </a>
+                <a
+                  href={DEMO_LOGIN_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex h-14 items-center justify-center rounded-full bg-white px-7 text-base font-semibold text-slate-950 transition hover:bg-slate-100"
+                >
+                  Demo
+                </a>
+              </div>
+              <div className="rounded-3xl border border-white/10 bg-white/8 p-4 text-sm text-slate-200">
+                <p className="font-semibold text-white">บัญชีทดสอบ Demo</p>
+                <div className="mt-3 grid gap-2 sm:grid-cols-3">
+                  <p>รหัสองค์กร: <span className="font-semibold text-[var(--color-accent-soft)]">{DEMO_ACCOUNT.organizationCode}</span></p>
+                  <p>Username: <span className="font-semibold text-[var(--color-accent-soft)]">{DEMO_ACCOUNT.username}</span></p>
+                  <p>Password: <span className="font-semibold text-[var(--color-accent-soft)]">{DEMO_ACCOUNT.password}</span></p>
+                </div>
               </div>
             </div>
 
