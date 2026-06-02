@@ -28,25 +28,31 @@ const PLAN_LABELS = {
     badge: 'ทดลองใช้ฟรี',
     name: 'ใช้ฟรี 3 เดือน',
     description: 'เปิดใช้ทุกฟังก์ชันในช่วงเริ่มต้น เหมาะสำหรับทดลองระบบจริงก่อนเลือกแพ็คเกจ',
+    monthlyPrice: 0,
     price: 'ฟรี',
     priceNote: 'ระยะทดลอง 3 เดือน',
     trialLabel: 'ใช้งานได้ครบทุกฟังก์ชันในช่วงทดลอง',
+    adminLimit: 'ไม่จำกัด',
   },
   starter: {
     badge: 'เริ่มต้น',
     name: 'สตาร์ทเตอร์',
     description: 'เหมาะสำหรับตลาดเดี่ยวหรืออาคารเดียวที่เริ่มใช้ระบบบริหารพื้นที่ขาย',
-    price: 'รอราคา',
-    priceNote: 'รอประกาศราคา',
+    monthlyPrice: 999,
+    price: '999',
+    priceNote: 'บาท/เดือน',
     trialLabel: 'เปิดใช้ฟรี 3 เดือนในช่วงแรก',
+    adminLimit: '1',
   },
   growth: {
-    badge: 'เติบโต',
-    name: 'โกรท',
+    badge: 'ธุรกิจ',
+    name: 'ธุรกิจ',
     description: 'เหมาะสำหรับองค์กรที่มีหลายตลาดและต้องการบริหารงานหลายส่วนในระบบเดียว',
-    price: 'รอราคา',
-    priceNote: 'รอประกาศราคา',
+    monthlyPrice: 1999,
+    price: '1,999',
+    priceNote: 'บาท/เดือน',
     trialLabel: 'เปิดใช้ฟรี 3 เดือนในช่วงแรก',
+    adminLimit: '3',
   },
 };
 const FEATURE_LABELS = {
@@ -57,9 +63,12 @@ const FEATURE_LABELS = {
   'mobile booking app': 'รองรับแอปฯ สำหรับผู้จองพื้นที่',
   'vendor booking app': 'รองรับแอปฯ สำหรับผู้จองพื้นที่',
   'accounting reports': 'รายงานบัญชีและรายงานการชำระเงิน',
+  'basic reports': 'รายงานการจองพื้นฐาน',
   '1 market': 'รองรับ 1 ตลาด',
   '3 markets': 'รองรับ 3 ตลาด',
   'up to 5 markets': 'รองรับสูงสุด 5 ตลาด',
+  '1 admin user excluding supervisor': 'แอดมิน 1 คน ไม่รวม supervisor',
+  '3 admin users excluding supervisor': 'แอดมินสูงสุด 3 คน ไม่รวม supervisor',
   '3 admin users': 'ผู้ดูแลระบบ 3 คน',
   '10 admin users': 'ผู้ดูแลระบบ 10 คน',
   'advanced reports': 'รายงานขั้นสูง',
@@ -79,6 +88,7 @@ const initialForm = {
   supervisorPhone: '',
   supervisorUsername: '',
   preferredPlanCode: DEFAULT_PLAN_CODE,
+  preferredBillingInterval: 'monthly',
   password: '',
   confirmPassword: '',
 };
@@ -208,6 +218,28 @@ function formatQuota(value) {
   return new Intl.NumberFormat('th-TH').format(numericValue);
 }
 
+function formatPrice(value) {
+  return new Intl.NumberFormat('th-TH', { maximumFractionDigits: 0 }).format(Number(value || 0));
+}
+
+function getPlanPrice(plan, interval = 'monthly') {
+  const presentation = getPlanPresentation(plan);
+  const monthlyPrice = Number(presentation.monthlyPrice || plan.base_price || 0);
+  if (!monthlyPrice) {
+    return { price: 'ฟรี', note: 'ระยะทดลอง 3 เดือน', discountLabel: '' };
+  }
+  if (interval === 'yearly') {
+    const yearlyPrice = monthlyPrice * 12;
+    const discountedPrice = Math.round(yearlyPrice * 0.85);
+    return {
+      price: formatPrice(discountedPrice),
+      note: 'บาท/ปี',
+      discountLabel: `ประหยัด ${formatPrice(yearlyPrice - discountedPrice)} บาท`,
+    };
+  }
+  return { price: formatPrice(monthlyPrice), note: 'บาท/เดือน', discountLabel: '' };
+}
+
 function Input({ label, hint, children }) {
   return (
     <label className="block">
@@ -230,6 +262,7 @@ export default function App() {
   const [success, setSuccess] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [billingIntervals, setBillingIntervals] = useState({});
 
   useEffect(() => {
     async function loadData() {
@@ -250,6 +283,7 @@ export default function App() {
         setForm((current) => ({
           ...current,
           preferredPlanCode: DEFAULT_PLAN_CODE,
+          preferredBillingInterval: current.preferredBillingInterval || 'monthly',
         }));
 
         if (overviewResponse.ok) {
@@ -276,8 +310,16 @@ export default function App() {
     setForm((current) => ({ ...current, [name]: value }));
   }
 
+  function setPlanBillingInterval(planCode, interval) {
+    setBillingIntervals((current) => ({ ...current, [planCode]: interval }));
+    setForm((current) => (
+      current.preferredPlanCode === planCode ? { ...current, preferredBillingInterval: interval } : current
+    ));
+  }
+
   function selectPlan(planCode) {
-    setForm((current) => ({ ...current, preferredPlanCode: planCode }));
+    const interval = billingIntervals[planCode] || 'monthly';
+    setForm((current) => ({ ...current, preferredPlanCode: planCode, preferredBillingInterval: interval }));
     signupRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -308,7 +350,7 @@ export default function App() {
           supervisorUsername: form.supervisorUsername,
           expectedGoLiveDate: '',
           preferredPlanCode: form.preferredPlanCode || DEFAULT_PLAN_CODE,
-          preferredBillingInterval: 'yearly',
+          preferredBillingInterval: form.preferredBillingInterval || 'monthly',
           password: form.password,
           notes: '',
         }),
@@ -326,6 +368,7 @@ export default function App() {
       setForm((current) => ({
         ...initialForm,
         preferredPlanCode: current.preferredPlanCode,
+        preferredBillingInterval: current.preferredBillingInterval,
       }));
     } catch (requestError) {
       setError(requestError.message || 'ไม่สามารถสมัครใช้งานได้');
@@ -640,6 +683,9 @@ export default function App() {
               {plans.map((plan) => {
                 const active = plan.code === selectedPlan?.code;
                 const planPresentation = getPlanPresentation(plan);
+                const billingInterval = billingIntervals[plan.code] || 'monthly';
+                const hasPaidPrice = Number(planPresentation.monthlyPrice || plan.base_price || 0) > 0;
+                const price = getPlanPrice(plan, billingInterval);
                 return (
                   <article key={plan.code} className={`plan-card ${active ? 'plan-card-active' : ''}`}>
                     <div className="flex items-start justify-between gap-4">
@@ -650,10 +696,29 @@ export default function App() {
                       {active ? <span className="rounded-full bg-[var(--color-accent)] px-3 py-1 text-xs font-semibold text-white">เลือกอยู่</span> : null}
                     </div>
                     <p className="mt-4 text-sm leading-7 text-slate-600">{planPresentation.description}</p>
+                    {hasPaidPrice ? (
+                      <div className="mt-5 grid grid-cols-2 rounded-full bg-slate-100 p-1 text-sm font-semibold text-slate-600">
+                        <button
+                          type="button"
+                          onClick={() => setPlanBillingInterval(plan.code, 'monthly')}
+                          className={`h-10 rounded-full transition ${billingInterval === 'monthly' ? 'bg-white text-slate-950 shadow-sm' : 'hover:text-slate-950'}`}
+                        >
+                          รายเดือน
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setPlanBillingInterval(plan.code, 'yearly')}
+                          className={`h-10 rounded-full transition ${billingInterval === 'yearly' ? 'bg-white text-slate-950 shadow-sm' : 'hover:text-slate-950'}`}
+                        >
+                          รายปี -15%
+                        </button>
+                      </div>
+                    ) : null}
                     <div className="mt-6 flex items-end gap-2">
-                      <span className="font-display text-4xl font-semibold text-slate-950">{planPresentation.price}</span>
-                      <span className="pb-2 text-sm text-slate-500">{planPresentation.priceNote}</span>
+                      <span className="font-display text-4xl font-semibold text-slate-950">{price.price}</span>
+                      <span className="pb-2 text-sm text-slate-500">{price.note}</span>
                     </div>
+                    {price.discountLabel ? <p className="mt-2 text-sm font-semibold text-emerald-700">{price.discountLabel}</p> : null}
                     <p className="mt-2 text-sm font-medium text-[var(--color-accent-deep)]">{planPresentation.trialLabel}</p>
                     <div className="mt-5 grid gap-3 rounded-2xl bg-slate-50 p-4 text-sm text-slate-700 sm:grid-cols-2">
                       <div>
@@ -661,11 +726,11 @@ export default function App() {
                         <p className="mt-1 font-semibold text-slate-950">{formatQuota(plan.included_markets)} ตลาด</p>
                       </div>
                       <div>
-                        <p className="text-xs font-medium text-slate-500">บิล/รายการต่อเดือน</p>
-                        <p className="mt-1 font-semibold text-slate-950">{formatQuota(plan.included_monthly_bookings)} รายการ</p>
+                        <p className="text-xs font-medium text-slate-500">แอดมิน</p>
+                        <p className="mt-1 font-semibold text-slate-950">{planPresentation.adminLimit} คน</p>
                       </div>
                     </div>
-                    <ul className="mt-6 space-y-3 text-sm text-slate-700">
+                    <ul className="mt-6 space-y-3 pb-6 text-sm text-slate-700">
                       {decodeFeatures(plan).map((feature) => (
                         <li key={feature} className="flex items-center gap-3">
                           <BadgeCheck className="h-4 w-4 text-[var(--color-accent)]" />
@@ -676,7 +741,7 @@ export default function App() {
                     <button
                       type="button"
                       onClick={() => selectPlan(plan.code)}
-                      className={`mt-8 inline-flex h-12 w-full items-center justify-center rounded-full px-5 text-sm font-semibold transition ${
+                      className={`mt-auto inline-flex h-12 w-full items-center justify-center rounded-full px-5 text-sm font-semibold transition ${
                         active
                           ? 'bg-[var(--color-ink)] text-white hover:bg-slate-800'
                           : 'bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-deep)]'
@@ -805,6 +870,7 @@ export default function App() {
                     <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-5 text-sm text-emerald-900">
                       <p className="font-semibold">ช่วงเปิดตัว: สมัครใช้ฟรี 3 เดือน</p>
                       <p className="mt-2">แพ็คเกจที่เลือก: {getPlanPresentation(selectedPlan).name}</p>
+                      <p className="mt-1">รอบบิลที่เลือก: {form.preferredBillingInterval === 'yearly' ? 'รายปี พร้อมส่วนลด 15%' : 'รายเดือน'}</p>
                       <p className="mt-1">ระบบจะผูกคำขอสมัครเข้ากับแพ็คเกจที่เลือก เพื่อรองรับการเปิดระบบค่าบริการในอนาคต</p>
                       <p className="mt-1">Trial ระยะเริ่มต้น {DEFAULT_TRIAL_DAYS} วัน</p>
                     </div>
