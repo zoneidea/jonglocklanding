@@ -574,27 +574,45 @@ export default function App() {
                 </section>
 
                 <section className="hero-surface hero-surface-secondary">
-                  <div className="flex flex-col gap-4 sm:flex-row sm:items-stretch">
-                    <div className="flex-1 rounded-2xl bg-[var(--color-sand)] p-5 text-[var(--color-ink)]">
+                  <div className="grid gap-4">
+                    <div className="rounded-2xl bg-[var(--color-sand)] p-5 text-[var(--color-ink)]">
                       <p className="text-sm font-medium">เริ่มต้นใช้งาน</p>
                       <p className="mt-2 whitespace-nowrap text-3xl font-semibold leading-tight">ใช้ฟรี 3 เดือน</p>
                       <p className="mt-2 text-sm text-slate-700">เปิดระบบให้ทดลองใช้งานก่อนเริ่มคิดค่าบริการ</p>
                     </div>
-                    <div className="grid min-w-0 flex-1 gap-3 sm:grid-cols-3">
+                    <div className="grid gap-3 sm:grid-cols-3">
                       <div className="rounded-2xl border border-slate-200 bg-white/80 p-4">
-                        <Building2 className="h-5 w-5 text-[var(--color-accent)]" />
-                        <p className="mt-3 text-sm text-slate-600">องค์กรที่เปิดใช้งาน</p>
-                        <p className="mt-1 text-3xl font-semibold leading-none text-slate-950">{overview?.activeOrganizations ?? 0}</p>
+                        <div className="flex items-center gap-3">
+                          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgba(17,148,131,0.1)]">
+                            <Building2 className="h-5 w-5 text-[var(--color-accent)]" />
+                          </span>
+                          <div className="min-w-0">
+                            <p className="text-xs font-medium leading-5 text-slate-600">องค์กรที่เปิดใช้งาน</p>
+                            <p className="mt-1 text-3xl font-semibold leading-none text-slate-950">{overview?.activeOrganizations ?? 0}</p>
+                          </div>
+                        </div>
                       </div>
                       <div className="rounded-2xl border border-slate-200 bg-white/80 p-4">
-                        <MapPinned className="h-5 w-5 text-[var(--color-accent)]" />
-                        <p className="mt-3 text-sm text-slate-600">ตลาดที่เปิดอยู่</p>
-                        <p className="mt-1 text-3xl font-semibold leading-none text-slate-950">{overview?.activeMarkets ?? 0}</p>
+                        <div className="flex items-center gap-3">
+                          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgba(17,148,131,0.1)]">
+                            <MapPinned className="h-5 w-5 text-[var(--color-accent)]" />
+                          </span>
+                          <div className="min-w-0">
+                            <p className="text-xs font-medium leading-5 text-slate-600">ตลาดที่เปิดอยู่</p>
+                            <p className="mt-1 text-3xl font-semibold leading-none text-slate-950">{overview?.activeMarkets ?? 0}</p>
+                          </div>
+                        </div>
                       </div>
                       <div className="rounded-2xl border border-slate-200 bg-white/80 p-4">
-                        <Eye className="h-5 w-5 text-[var(--color-accent)]" />
-                        <p className="mt-3 text-sm text-slate-600">ผู้เข้าชมวันนี้</p>
-                        <p className="mt-1 text-3xl font-semibold leading-none text-slate-950">{overview?.landingVisitorsToday ?? 0}</p>
+                        <div className="flex items-center gap-3">
+                          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgba(17,148,131,0.1)]">
+                            <Eye className="h-5 w-5 text-[var(--color-accent)]" />
+                          </span>
+                          <div className="min-w-0">
+                            <p className="text-xs font-medium leading-5 text-slate-600">ผู้เข้าชมวันนี้</p>
+                            <p className="mt-1 text-3xl font-semibold leading-none text-slate-950">{overview?.landingVisitorsToday ?? 0}</p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
