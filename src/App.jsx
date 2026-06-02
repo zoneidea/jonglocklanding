@@ -201,6 +201,13 @@ function translateFeature(feature) {
   return FEATURE_LABELS[feature] || feature;
 }
 
+function formatQuota(value) {
+  const numericValue = Number(value || 0);
+  if (!numericValue) return 'ไม่จำกัด';
+  if (numericValue >= 9999) return 'ไม่จำกัด';
+  return new Intl.NumberFormat('th-TH').format(numericValue);
+}
+
 function Input({ label, hint, children }) {
   return (
     <label className="block">
@@ -269,6 +276,11 @@ export default function App() {
     setForm((current) => ({ ...current, [name]: value }));
   }
 
+  function selectPlan(planCode) {
+    setForm((current) => ({ ...current, preferredPlanCode: planCode }));
+    signupRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
     setError('');
@@ -295,7 +307,7 @@ export default function App() {
           supervisorPhone: form.supervisorPhone,
           supervisorUsername: form.supervisorUsername,
           expectedGoLiveDate: '',
-          preferredPlanCode: DEFAULT_PLAN_CODE,
+          preferredPlanCode: form.preferredPlanCode || DEFAULT_PLAN_CODE,
           preferredBillingInterval: 'yearly',
           password: form.password,
           notes: '',
@@ -643,6 +655,16 @@ export default function App() {
                       <span className="pb-2 text-sm text-slate-500">{planPresentation.priceNote}</span>
                     </div>
                     <p className="mt-2 text-sm font-medium text-[var(--color-accent-deep)]">{planPresentation.trialLabel}</p>
+                    <div className="mt-5 grid gap-3 rounded-2xl bg-slate-50 p-4 text-sm text-slate-700 sm:grid-cols-2">
+                      <div>
+                        <p className="text-xs font-medium text-slate-500">ตลาด</p>
+                        <p className="mt-1 font-semibold text-slate-950">{formatQuota(plan.included_markets)} ตลาด</p>
+                      </div>
+                      <div>
+                        <p className="text-xs font-medium text-slate-500">บิล/รายการต่อเดือน</p>
+                        <p className="mt-1 font-semibold text-slate-950">{formatQuota(plan.included_monthly_bookings)} รายการ</p>
+                      </div>
+                    </div>
                     <ul className="mt-6 space-y-3 text-sm text-slate-700">
                       {decodeFeatures(plan).map((feature) => (
                         <li key={feature} className="flex items-center gap-3">
@@ -651,6 +673,17 @@ export default function App() {
                         </li>
                       ))}
                     </ul>
+                    <button
+                      type="button"
+                      onClick={() => selectPlan(plan.code)}
+                      className={`mt-8 inline-flex h-12 w-full items-center justify-center rounded-full px-5 text-sm font-semibold transition ${
+                        active
+                          ? 'bg-[var(--color-ink)] text-white hover:bg-slate-800'
+                          : 'bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-deep)]'
+                      }`}
+                    >
+                      {active ? 'เลือกแพ็คเกจนี้อยู่' : 'เลือกแพ็คเกจนี้'}
+                    </button>
                   </article>
                 );
               })}
@@ -771,7 +804,8 @@ export default function App() {
                   {selectedPlan ? (
                     <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-5 text-sm text-emerald-900">
                       <p className="font-semibold">ช่วงเปิดตัว: สมัครใช้ฟรี 3 เดือน</p>
-                      <p className="mt-2">ระบบจะผูกคำขอสมัครเข้ากับแผนเริ่มต้นภายในระบบอัตโนมัติเพื่อรองรับการเปิด billing ในอนาคต</p>
+                      <p className="mt-2">แพ็คเกจที่เลือก: {getPlanPresentation(selectedPlan).name}</p>
+                      <p className="mt-1">ระบบจะผูกคำขอสมัครเข้ากับแพ็คเกจที่เลือก เพื่อรองรับการเปิดระบบค่าบริการในอนาคต</p>
                       <p className="mt-1">Trial ระยะเริ่มต้น {DEFAULT_TRIAL_DAYS} วัน</p>
                     </div>
                   ) : null}
