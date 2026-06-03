@@ -199,6 +199,29 @@ const workflow = [
   },
 ];
 
+const faqItems = [
+  {
+    question: 'Jonglock เหมาะกับตลาดแบบไหน',
+    answer: 'เหมาะกับตลาดนัด อาคารสำนักงาน พื้นที่เช่า และองค์กรที่ต้องจัดการหลายตลาดหรือหลายโซน พร้อมระบบจองบูธและรายงานบัญชี',
+  },
+  {
+    question: 'ผู้ค้าจองพื้นที่ขายผ่านแอปได้ไหม',
+    answer: 'ผู้ค้าสามารถเลือกตลาด เลือกวัน เลือกบูธ ยืนยันการจอง และแนบหลักฐานการชำระเงินผ่านแอปได้',
+  },
+  {
+    question: 'รองรับหลายตลาดในองค์กรเดียวหรือไม่',
+    answer: 'รองรับหลายตลาดในองค์กรเดียว พร้อมแยกสิทธิ์ผู้ใช้งาน ตลาด บูธ รายงาน และข้อมูลตามองค์กรอย่างชัดเจน',
+  },
+  {
+    question: 'รองรับงานบัญชีและ VAT หรือไม่',
+    answer: 'รองรับการตั้งค่า VAT รายงานการชำระเงิน รายงานลูกหนี้ค้างชำระ รายงานภาษีขาย และข้อมูลสำหรับต่อยอดเอกสารบัญชี',
+  },
+  {
+    question: 'แอดมินสามารถจองแทนผู้ค้าได้หรือไม่',
+    answer: 'แอดมินสามารถจองแทนสมาชิกได้ และรายการจะไปแสดงในตะกร้าของผู้ค้าเพื่อดำเนินการชำระเงินผ่านแอป',
+  },
+];
+
 function decodeFeatures(plan) {
   if (Array.isArray(plan.features)) return plan.features;
   return [];
@@ -473,7 +496,7 @@ export default function App() {
 
               <div className="space-y-5">
                 <h1 className="max-w-4xl font-display text-5xl font-semibold leading-[1.02] text-white sm:text-6xl lg:text-7xl">
-                  ระบบจัดการตลาดที่
+                  ระบบจองพื้นที่ขายและจัดการตลาดที่
                   <span className="block whitespace-nowrap text-[var(--color-accent-soft)]">ดูมืออาชีพตั้งแต่หน้าแรก</span>
                 </h1>
                 <p className="max-w-2xl text-lg leading-8 text-slate-200">
@@ -843,6 +866,27 @@ export default function App() {
               })}
             </div>
           ) : null}
+        </section>
+
+        <section className="mx-auto max-w-7xl px-5 py-8 lg:px-8">
+          <div className="rounded-[2.25rem] bg-white p-7 shadow-[0_28px_90px_rgba(15,23,42,0.1)] lg:p-9">
+            <div className="section-heading">
+              <p className="section-kicker">FAQ</p>
+              <h2 className="section-title whitespace-nowrap">คำถามที่พบบ่อยเกี่ยวกับระบบจองพื้นที่ขาย</h2>
+              <p className="section-copy">
+                สรุปคำตอบสำคัญสำหรับเจ้าของตลาดหรือทีมบริหารพื้นที่ขายที่กำลังมองหาระบบจองบูธและจัดการตลาดแบบครบวงจร
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-4 lg:grid-cols-2">
+              {faqItems.map((item) => (
+                <article key={item.question} className="faq-card">
+                  <h3 className="text-lg font-semibold leading-7 text-slate-950">{item.question}</h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{item.answer}</p>
+                </article>
+              ))}
+            </div>
+          </div>
         </section>
 
         <section id="signup" ref={signupRef} className="mx-auto max-w-7xl px-5 pb-24 pt-8 lg:px-8">
