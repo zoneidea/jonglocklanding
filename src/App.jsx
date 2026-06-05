@@ -6,6 +6,7 @@ import {
   CheckCircle2,
   ChartColumnIncreasing,
   CreditCard,
+  Download,
   Eye,
   EyeOff,
   Layers3,
@@ -20,6 +21,7 @@ import jonglockLogoWhite from './assets/jonglock-logo-white.png';
 const API_BASE_URL = import.meta.env.VITE_PUBLIC_API_BASE_URL || 'https://jonglockapi.zonedevnode.com/api/public';
 const MANAGEMENT_APP_URL = import.meta.env.VITE_MANAGEMENT_APP_URL || 'https://management.jonglock.com';
 const DEMO_MANAGEMENT_APP_URL = import.meta.env.VITE_DEMO_MANAGEMENT_APP_URL || 'https://jonglockmng.zonedevnode.com';
+const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=th.co.zoneidea';
 const DEMO_LOGIN_URL = `${DEMO_MANAGEMENT_APP_URL.replace(/\/$/, '')}/login?organizationCode=ORG001&username=admin`;
 const DEMO_ACCOUNT = {
   organizationCode: 'ORG001',
@@ -539,6 +541,15 @@ export default function App() {
                   className="inline-flex h-14 items-center justify-center rounded-full bg-white px-7 text-base font-semibold text-slate-950 transition hover:bg-slate-100"
                 >
                   Demo
+                </a>
+                <a
+                  href={PLAY_STORE_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-[var(--color-accent)] bg-[rgba(20,184,166,0.14)] px-7 text-base font-semibold text-[var(--color-accent-soft)] transition hover:bg-[rgba(20,184,166,0.22)]"
+                >
+                  <Download className="h-5 w-5" />
+                  ดาวน์โหลดแอป Android
                 </a>
               </div>
               <div className="rounded-3xl border border-white/10 bg-white/8 p-4 text-sm text-slate-200">
