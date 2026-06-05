@@ -20,7 +20,9 @@ import {
   Sparkles,
 } from 'lucide-react';
 import jonglockLogoWhite from './assets/jonglock-logo-white.png';
-import mobileAppPreview from './assets/showcase/mobile-app.webp';
+import appMarketListPreview from './assets/showcase/app-market-list.svg';
+import appBoothGridPreview from './assets/showcase/app-booth-grid.svg';
+import appBoothDetailPreview from './assets/showcase/app-booth-detail.svg';
 import managementDashboardPreview from './assets/showcase/management-dashboard.webp';
 import managementBoothsPreview from './assets/showcase/management-booths.webp';
 import managementReportsPreview from './assets/showcase/management-reports.webp';
@@ -765,8 +767,18 @@ export default function App() {
                 <p className="text-sm font-semibold text-slate-500">Android พร้อมใช้งานก่อน ส่วน iOS อยู่ระหว่างเตรียมเผยแพร่</p>
               </div>
 
-              <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-50 p-3 shadow-inner">
-                <img src={mobileAppPreview} alt="ตัวอย่างหน้าจอแอป Jonglock สำหรับผู้ค้า" className="h-full w-full rounded-[1.5rem] object-cover" loading="lazy" />
+              <div className="rounded-[2rem] border border-slate-200 bg-slate-50 p-3 shadow-inner">
+                <div className="grid gap-3 sm:grid-cols-3">
+                  {[
+                    { src: appMarketListPreview, alt: 'ตัวอย่างแอป Jonglock หน้ารายการตลาด' },
+                    { src: appBoothGridPreview, alt: 'ตัวอย่างแอป Jonglock หน้าเลือกบูธ' },
+                    { src: appBoothDetailPreview, alt: 'ตัวอย่างแอป Jonglock รายละเอียดบูธและสรุปรายการจอง' },
+                  ].map((item) => (
+                    <figure key={item.src} className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-[0_18px_45px_rgba(15,23,42,0.12)]">
+                      <img src={item.src} alt={item.alt} className="h-full w-full object-cover" loading="lazy" />
+                    </figure>
+                  ))}
+                </div>
               </div>
             </div>
 

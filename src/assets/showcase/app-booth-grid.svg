@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="760" viewBox="0 0 420 760" role="img" aria-label="Jonglock app booth grid preview">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#f8fffd"/><stop offset="1" stop-color="#eef8f7"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#0f172a" flood-opacity="0.12"/></filter>
+  </defs>
+  <rect width="420" height="760" rx="42" fill="url(#bg)"/>
+  <rect x="122" y="18" width="112" height="36" rx="18" fill="#020817"/>
+  <text x="42" y="48" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#020817">15:26</text>
+  <rect x="30" y="88" width="82" height="46" rx="22" fill="#fff" stroke="#dbe8ef" stroke-width="2"/>
+  <text x="56" y="118" font-family="Arial, sans-serif" font-size="20" font-weight="800" fill="#020817">กลับ</text>
+  <rect x="30" y="174" width="360" height="86" rx="26" fill="#fff" stroke="#dbe8ef" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="58" y="202" width="44" height="44" rx="16" fill="#e7f7f4"/>
+  <path d="M74 216h8v8h-8zm14 0h8v8h-8zm-14 14h8v8h-8zm14 14h8v8h-8z" fill="#0f8f83"/>
+  <text x="122" y="214" font-family="Arial, sans-serif" font-size="18" font-weight="900" letter-spacing="2" fill="#0f766e">Jonglock Demo Market</text>
+  <text x="122" y="240" font-family="Arial, sans-serif" font-size="28" font-weight="900" fill="#020817">เลือกบูธ</text>
+  <text x="122" y="254" font-family="Arial, sans-serif" font-size="15" font-weight="800" fill="#64748b">Test Plan • 8 มิ.ย. 2569 - 12 มิ.ย. 2569</text>
+  <g font-family="Arial, sans-serif" font-size="17" font-weight="900">
+    <rect x="30" y="286" width="110" height="42" rx="21" fill="#effdfa" stroke="#99f6e4"/>
+    <text x="55" y="313" fill="#0f766e">เปลี่ยนตลาด</text>
+    <rect x="150" y="286" width="110" height="42" rx="21" fill="#effdfa" stroke="#99f6e4"/>
+    <text x="181" y="313" fill="#0f766e">เปลี่ยนโซน</text>
+    <rect x="270" y="286" width="110" height="42" rx="21" fill="#effdfa" stroke="#99f6e4"/>
+    <text x="300" y="313" fill="#0f766e">เปลี่ยนวันที่</text>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="18" font-weight="800">
+    <rect x="30" y="350" width="94" height="36" rx="18" fill="#fff" stroke="#dbe8ef" stroke-width="2"/><circle cx="48" cy="368" r="8" fill="#10b981"/><text x="64" y="374" fill="#020817">ว่างทุกวัน</text>
+    <rect x="136" y="350" width="94" height="36" rx="18" fill="#fff" stroke="#dbe8ef" stroke-width="2"/><circle cx="154" cy="368" r="8" fill="#fbbf24"/><text x="170" y="374" fill="#020817">ว่างบางวัน</text>
+    <rect x="242" y="350" width="94" height="36" rx="18" fill="#fff" stroke="#dbe8ef" stroke-width="2"/><circle cx="260" cy="368" r="8" fill="#ef4444"/><text x="276" y="374" fill="#020817">ไม่ว่างเลย</text>
+  </g>
+  <g font-family="Arial, sans-serif" font-weight="900" text-anchor="middle">
+    <g transform="translate(34 418)"><rect width="62" height="62" rx="14" fill="#10b981" stroke="#059669" stroke-width="2"/><text x="31" y="28" font-size="23" fill="#fff">A01</text><text x="31" y="48" font-size="14" fill="#d1fae5">500.00</text></g>
+    <g transform="translate(112 418)"><rect width="62" height="62" rx="14" fill="#fbbf24" stroke="#d97706" stroke-width="2"/><text x="31" y="28" font-size="23" fill="#78350f">A02</text><text x="31" y="48" font-size="14" fill="#78350f">500.00</text></g>
+    <g transform="translate(190 418)"><rect width="62" height="62" rx="14" fill="#10b981" stroke="#059669" stroke-width="2"/><text x="31" y="28" font-size="23" fill="#fff">A03</text><text x="31" y="48" font-size="14" fill="#d1fae5">500.00</text></g>
+    <g transform="translate(268 418)"><rect width="62" height="62" rx="14" fill="#10b981" stroke="#059669" stroke-width="2"/><text x="31" y="28" font-size="23" fill="#fff">A04</text><text x="31" y="48" font-size="14" fill="#d1fae5">500.00</text></g>
+    <g transform="translate(346 418)"><rect width="62" height="62" rx="14" fill="#10b981" stroke="#059669" stroke-width="2"/><text x="31" y="28" font-size="23" fill="#fff">A05</text><text x="31" y="48" font-size="14" fill="#d1fae5">500.00</text></g>
+    <g transform="translate(76 504)"><rect width="62" height="62" rx="14" fill="#10b981" stroke="#059669" stroke-width="2"/><text x="31" y="28" font-size="23" fill="#fff">A06</text><text x="31" y="48" font-size="14" fill="#d1fae5">650.00</text></g>
+    <g transform="translate(154 504)"><rect width="62" height="62" rx="14" fill="#10b981" stroke="#059669" stroke-width="2"/><text x="31" y="28" font-size="23" fill="#fff">A07</text><text x="31" y="48" font-size="14" fill="#d1fae5">650.00</text></g>
+    <g transform="translate(232 504)"><rect width="62" height="62" rx="14" fill="#10b981" stroke="#059669" stroke-width="2"/><text x="31" y="28" font-size="23" fill="#fff">A08</text><text x="31" y="48" font-size="14" fill="#d1fae5">650.00</text></g>
+    <g transform="translate(310 504)"><rect width="62" height="62" rx="14" fill="#10b981" stroke="#059669" stroke-width="2"/><text x="31" y="28" font-size="23" fill="#fff">A09</text><text x="31" y="48" font-size="14" fill="#d1fae5">650.00</text></g>
+  </g>
+  <rect x="32" y="684" width="368" height="56" rx="28" fill="#fff" stroke="#dbe8ef" stroke-width="2"/>
+  <circle cx="160" cy="684" r="34" fill="#14b8a6"/>
+</svg>
