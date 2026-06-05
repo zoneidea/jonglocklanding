@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
+  Apple,
   ArrowRight,
   BadgeCheck,
   Building2,
@@ -11,17 +12,24 @@ import {
   EyeOff,
   Layers3,
   MapPinned,
+  MonitorSmartphone,
   PhoneCall,
+  Play,
   ReceiptText,
   ShieldCheck,
   Sparkles,
 } from 'lucide-react';
 import jonglockLogoWhite from './assets/jonglock-logo-white.png';
+import mobileAppPreview from './assets/showcase/mobile-app.webp';
+import managementDashboardPreview from './assets/showcase/management-dashboard.webp';
+import managementBoothsPreview from './assets/showcase/management-booths.webp';
+import managementReportsPreview from './assets/showcase/management-reports.webp';
 
 const API_BASE_URL = import.meta.env.VITE_PUBLIC_API_BASE_URL || 'https://jonglockapi.zonedevnode.com/api/public';
 const MANAGEMENT_APP_URL = import.meta.env.VITE_MANAGEMENT_APP_URL || 'https://management.jonglock.com';
 const DEMO_MANAGEMENT_APP_URL = import.meta.env.VITE_DEMO_MANAGEMENT_APP_URL || 'https://jonglockmng.zonedevnode.com';
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=th.co.zoneidea';
+const APP_STORE_URL = '';
 const DEMO_LOGIN_URL = `${DEMO_MANAGEMENT_APP_URL.replace(/\/$/, '')}/login?organizationCode=ORG001&username=admin`;
 const DEMO_ACCOUNT = {
   organizationCode: 'ORG001',
@@ -160,47 +168,6 @@ const audiences = [
   'องค์กรที่ดูแลหลายตลาดหรือหลายสาขา',
 ];
 
-const productFlow = [
-  {
-    step: '01',
-    title: 'ตั้งค่าองค์กรและตลาด',
-    description: 'สร้างตลาด พื้นที่ขาย วันเปิดจอง บัญชีรับเงิน และเงื่อนไขการจอง',
-  },
-  {
-    step: '02',
-    title: 'สร้างผังบูธและบริการเสริม',
-    description: 'กำหนดแผนผังบูธ ประเภทสินค้า ราคา อุปกรณ์ให้เช่า และโค้ดส่วนลด',
-  },
-  {
-    step: '03',
-    title: 'เปิดให้ผู้ค้าจองผ่านแอปฯ',
-    description: 'ผู้ค้าเลือกวัน เลือกบูธ ยืนยันการจอง และแนบหลักฐานชำระเงินผ่านมือถือ',
-  },
-  {
-    step: '04',
-    title: 'ตรวจสอบ บัญชี และรายงาน',
-    description: 'แอดมินตรวจสลิป ทีม audit เช็คอิน/บันทึกค่าปรับ และบัญชีดูรายงานได้ทันที',
-  },
-];
-
-const workflow = [
-  {
-    step: '01',
-    title: 'สมัครด้วยข้อมูลที่จำเป็น',
-    description: 'กรอกข้อมูลองค์กรและผู้ดูแลหลักเท่าที่จำเป็นเพื่อลดขั้นตอนเริ่มต้นให้สั้นที่สุด',
-  },
-  {
-    step: '02',
-    title: 'เริ่มใช้ฟรี 3 เดือน',
-    description: 'ระบบสร้าง subscription record และกำหนดช่วงทดลองใช้ฟรีไว้ให้อัตโนมัติทันทีหลังส่งคำขอ',
-  },
-  {
-    step: '03',
-    title: 'พร้อมต่อยอด billing',
-    description: 'รองรับ usage, invoice, overage และ VAT สำหรับการคิดค่าบริการในอนาคต',
-  },
-];
-
 const faqItems = [
   {
     question: 'Jonglock เหมาะกับตลาดแบบไหน',
@@ -280,6 +247,32 @@ function Input({ label, hint, children }) {
       {children}
       {hint ? <span className="mt-2 block text-xs text-slate-500">{hint}</span> : null}
     </label>
+  );
+}
+
+function StoreBadge({ href, disabled = false, icon: Icon, eyebrow, label }) {
+  const content = (
+    <>
+      <Icon className="h-8 w-8 shrink-0" fill="currentColor" />
+      <span className="text-left leading-none">
+        <span className="block text-[10px] font-semibold uppercase tracking-wide text-white/70">{eyebrow}</span>
+        <span className="mt-1 block text-lg font-bold text-white">{label}</span>
+      </span>
+    </>
+  );
+
+  if (disabled || !href) {
+    return (
+      <button type="button" disabled className="inline-flex h-16 min-w-[190px] cursor-not-allowed items-center justify-center gap-3 rounded-2xl bg-slate-950 px-5 text-white opacity-55">
+        {content}
+      </button>
+    );
+  }
+
+  return (
+    <a href={href} target="_blank" rel="noreferrer" className="inline-flex h-16 min-w-[190px] items-center justify-center gap-3 rounded-2xl bg-slate-950 px-5 text-white shadow-[0_20px_50px_rgba(2,8,23,0.22)] transition hover:-translate-y-0.5 hover:bg-slate-800">
+      {content}
+    </a>
   );
 }
 
@@ -749,45 +742,46 @@ export default function App() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-5 py-8 lg:px-8">
-          <div className="rounded-[2.25rem] bg-white p-7 shadow-[0_28px_90px_rgba(15,23,42,0.1)] lg:p-9">
-            <div className="section-heading">
-              <p className="section-kicker">Product flow</p>
-              <h2 className="section-title whitespace-nowrap">จากตั้งค่าตลาดถึงรายงานบัญชีในระบบเดียว</h2>
-              <p className="section-copy">
-                Flow หลักถูกออกแบบให้ทีมบริหารตลาดเริ่มใช้งานได้เร็ว และต่อยอดเป็นระบบ subscription หรือ billing ได้ในอนาคต
-              </p>
-            </div>
-            <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-              {productFlow.map((item) => (
-                <article key={item.step} className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
-                  <p className="inline-flex h-10 min-w-10 items-center justify-center rounded-full bg-[var(--color-accent)] px-3 text-sm font-bold text-white">{item.step}</p>
-                  <h3 className="mt-5 text-xl font-semibold text-slate-950">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">{item.description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <section id="app-preview" className="mx-auto max-w-7xl px-5 py-14 lg:px-8">
+          <div className="rounded-[2.5rem] border border-white/10 bg-white p-5 shadow-[0_30px_100px_rgba(2,8,23,0.18)] lg:p-8">
+            <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+              <div className="space-y-6">
+                <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[rgba(17,148,131,0.12)] text-[var(--color-accent)]">
+                  <MonitorSmartphone className="h-7 w-7" />
+                </div>
+                <div>
+                  <p className="section-kicker">Web Admin + Mobile App</p>
+                  <h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-slate-950 lg:text-5xl">
+                    เห็นภาพการใช้งานจริงทั้งระบบจัดการและแอปฯ ผู้ค้า
+                  </h2>
+                  <p className="mt-5 max-w-xl text-base leading-8 text-slate-600">
+                    ผู้ดูแลจัดการตลาด บูธ รายงาน และบัญชีผ่าน Web Admin ส่วนผู้ค้าใช้แอปฯ เพื่อค้นหาตลาด เลือกบูธ ยืนยันรายการ และติดตามการชำระเงินได้ใน flow เดียวกัน
+                  </p>
+                </div>
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <StoreBadge href={PLAY_STORE_URL} icon={Play} eyebrow="Get it on" label="Google Play" />
+                  <StoreBadge href={APP_STORE_URL} disabled icon={Apple} eyebrow="Download on the" label="App Store" />
+                </div>
+                <p className="text-sm font-semibold text-slate-500">Android พร้อมใช้งานก่อน ส่วน iOS อยู่ระหว่างเตรียมเผยแพร่</p>
+              </div>
 
-        <section className="mx-auto max-w-7xl px-5 py-6 lg:px-8">
-          <div className="workflow-shell">
-            <div className="section-heading section-heading-dark">
-              <p className="section-kicker">Lifecycle</p>
-              <h2 className="section-title section-title-light">
-                เริ่มใช้ฟรีวันนี้ และโครงสร้าง
-                <span className="block whitespace-nowrap">ข้อมูลพร้อมรองรับ billing ในอนาคต</span>
-              </h2>
+              <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-50 p-3 shadow-inner">
+                <img src={mobileAppPreview} alt="ตัวอย่างหน้าจอแอป Jonglock สำหรับผู้ค้า" className="h-full w-full rounded-[1.5rem] object-cover" loading="lazy" />
+              </div>
             </div>
 
-            <div className="mt-10 grid gap-5 lg:grid-cols-3">
-              {workflow.map((item) => (
-                <article key={item.step} className="workflow-card">
-                  <p className="workflow-step">{item.step}</p>
-                  <h3 className="mt-5 text-xl font-semibold text-white">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-300">{item.description}</p>
-                </article>
-              ))}
+            <div className="mt-8 grid gap-4 lg:grid-cols-[1.35fr_0.65fr]">
+              <figure className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-slate-50">
+                <img src={managementDashboardPreview} alt="ตัวอย่าง Dashboard ระบบจัดการ Jonglock" className="h-full w-full object-cover" loading="lazy" />
+              </figure>
+              <div className="grid gap-4">
+                <figure className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-slate-50">
+                  <img src={managementBoothsPreview} alt="ตัวอย่างหน้าจัดการบูธ Jonglock" className="h-full w-full object-cover" loading="lazy" />
+                </figure>
+                <figure className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-slate-50">
+                  <img src={managementReportsPreview} alt="ตัวอย่างหน้ารายงานการจอง Jonglock" className="h-full w-full object-cover" loading="lazy" />
+                </figure>
+              </div>
             </div>
           </div>
         </section>
