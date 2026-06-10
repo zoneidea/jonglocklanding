@@ -491,13 +491,20 @@ export default function App() {
               </div>
 
               <div className="space-y-5">
+                {/* <h1 className="max-w-4xl font-display text-5xl font-semibold leading-[1.02] text-white sm:text-6xl lg:text-7xl">
+                  ระบบจัดการธุรกิจตลาด
+                  <span className="block whitespace-nowrap text-[var(--color-accent-soft)]">
+                    และพื้นที่ขายที่ครบวงจร
+                  </span>
+                </h1> */}
                 <h1 className="max-w-4xl font-display text-5xl font-semibold leading-[1.02] text-white sm:text-6xl lg:text-7xl">
-                  ระบบจองพื้นที่ขายและจัดการตลาดที่
-                  <span className="block whitespace-nowrap text-[var(--color-accent-soft)]">ดูมืออาชีพตั้งแต่หน้าแรก</span>
+                  เลิกจองล็อกผ่านแชท
+                  <span className="block whitespace-nowrap text-[var(--color-accent-soft)]">
+                    จัดการตลาดได้ครบ<br />ในระบบเดียว
+                  </span>
                 </h1>
                 <p className="max-w-2xl text-lg leading-8 text-slate-200">
-                  Jonglock ช่วยให้องค์กรตลาดเปิดรับผู้ค้า จัดการผังบูธ ตรวจสอบการจอง
-                  ออกเอกสารบัญชี และเตรียมโครงสร้าง subscription สำหรับการเติบโตในอนาคตจากระบบเดียว
+                  JongLock ช่วยเจ้าของตลาดจัดการล็อกว่าง การจองพื้นที่ ผู้ค้า การชำระเงิน ข่าวสาร และการตรวจตลาด ให้เป็นระบบ ลดงานแอดมิน ลดปัญหาจองซ้ำ และดูรายงานได้ง่ายขึ้น
                 </p>
               </div>
 
@@ -520,30 +527,21 @@ export default function App() {
                   สมัครใช้งาน
                   <ArrowRight className="h-5 w-5" />
                 </button>
-                <a
+                {/* <a
                   href={MANAGEMENT_APP_URL}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex h-14 items-center justify-center rounded-full border border-white/12 bg-white/6 px-7 text-base font-semibold text-white transition hover:bg-white/10"
                 >
                   ดูระบบจัดการ
-                </a>
+                </a> */}
                 <a
                   href={DEMO_LOGIN_URL}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex h-14 items-center justify-center rounded-full bg-white px-7 text-base font-semibold text-slate-950 transition hover:bg-slate-100"
                 >
-                  Demo
-                </a>
-                <a
-                  href={PLAY_STORE_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-[var(--color-accent)] bg-[rgba(20,184,166,0.14)] px-7 text-base font-semibold text-[var(--color-accent-soft)] transition hover:bg-[rgba(20,184,166,0.22)]"
-                >
-                  <Download className="h-5 w-5" />
-                  ดาวน์โหลดแอป Android
+                  ตัวอย่างระบบ
                 </a>
               </div>
               <div className="rounded-3xl border border-white/10 bg-white/8 p-4 text-sm text-slate-200">
@@ -608,8 +606,8 @@ export default function App() {
                       <p className="mt-2 whitespace-nowrap text-3xl font-semibold leading-tight">ใช้ฟรี 3 เดือน</p>
                       <p className="mt-2 text-sm text-slate-700">เปิดระบบให้ทดลองใช้งานก่อนเริ่มคิดค่าบริการ</p>
                     </div>
-                    <div className="grid gap-3 sm:grid-cols-3">
-                      <div className="rounded-2xl border border-slate-200 bg-white/80 p-4">
+                     <div className="grid gap-3 sm:grid-cols-3">
+                     {/* <div className="rounded-2xl border border-slate-200 bg-white/80 p-4">
                         <div className="flex items-center gap-3">
                           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgba(17,148,131,0.1)]">
                             <Building2 className="h-5 w-5 text-[var(--color-accent)]" />
@@ -630,7 +628,7 @@ export default function App() {
                             <p className="mt-1 text-3xl font-semibold leading-none text-slate-950">{overview?.activeMarkets ?? 0}</p>
                           </div>
                         </div>
-                      </div>
+                      </div>*/}
                       <div className="rounded-2xl border border-slate-200 bg-white/80 p-4">
                         <div className="flex items-center gap-3">
                           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgba(17,148,131,0.1)]">
@@ -642,7 +640,7 @@ export default function App() {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> 
                   </div>
                 </section>
               </div>
