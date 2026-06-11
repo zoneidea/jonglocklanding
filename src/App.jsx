@@ -4,20 +4,33 @@ import {
   ArrowRight,
   BadgeCheck,
   Building2,
+  CalendarDays,
   CheckCircle2,
   ChartColumnIncreasing,
+  ClipboardCheck,
+  ClipboardList,
   CreditCard,
   Download,
   Eye,
   EyeOff,
+  FileText,
   Layers3,
   MapPinned,
+  Megaphone,
+  MessageCircleWarning,
   MonitorSmartphone,
   PhoneCall,
   Play,
+  QrCode,
   ReceiptText,
+  ScanLine,
+  SearchCheck,
   ShieldCheck,
   Sparkles,
+  Store,
+  UserCheck,
+  UsersRound,
+  WalletCards,
 } from 'lucide-react';
 import jonglockLogoWhite from './assets/jonglock-logo-white.png';
 import appMarketListPreview from './assets/showcase/app-market-list.svg';
@@ -113,31 +126,112 @@ const initialForm = {
 };
 
 const highlights = [
-  { label: 'หลายตลาดในองค์กรเดียว', value: 'Multi-market', icon: Layers3 },
-  { label: 'สิทธิ์ผู้ใช้งานครบ', value: 'Supervisor / Admin / Accounting / Audit', icon: ShieldCheck },
-  { label: 'รายงานพร้อมใช้งาน', value: 'Bookings, VAT, Receivables, Reconciliation', icon: ReceiptText },
+  { label: 'ดูล็อกว่างได้ทันที', value: 'ลดจองซ้ำ', icon: SearchCheck },
+  { label: 'ผู้ค้าจองผ่านแอป', value: 'Mobile booking', icon: PhoneCall },
+  { label: 'รายงานพร้อมใช้งาน', value: 'Booking + Payment', icon: ReceiptText },
 ];
 
-const featureCards = [
+const painPoints = [
+  { title: 'รับจองผ่าน LINE หรือโทรศัพท์', description: 'ข้อมูลกระจัดกระจาย แอดมินต้องไล่ย้อนแชทและจดข้อมูลเอง', icon: MessageCircleWarning },
+  { title: 'ผู้ค้าถามซ้ำทุกวัน', description: 'ล็อกว่างไหม ราคาเท่าไร จองได้วันไหน กลายเป็นงานตอบคำถามซ้ำ', icon: PhoneCall },
+  { title: 'เช็กสลิปเองและเสี่ยงยอดผิด', description: 'ข้อมูลการจองกับยอดเงินไม่ต่อกัน ทำให้ตรวจสอบยาก', icon: WalletCards },
+  { title: 'จองซ้ำหรือล็อกชนกัน', description: 'ไม่มีสถานะล็อกตามวันที่ชัดเจน ทำให้เกิดรายการซ้อนกันได้', icon: CalendarDays },
+  { title: 'หลายโซนหลายราคาแต่ยังใช้ Excel', description: 'จัดการยากเมื่อมีหลายตลาด หลายผัง หรือหลายประเภทสินค้า', icon: FileText },
+  { title: 'ตรวจหน้างานไม่เป็นระบบ', description: 'ไม่รู้ว่าผู้ค้ามาขายตรงวัน ตรงล็อก หรือขายสินค้าถูกประเภทหรือไม่', icon: ClipboardCheck },
+];
+
+const coreFeatures = [
   {
-    title: 'Control Tower สำหรับตลาด',
-    description: 'จัดการบูธ ผังตลาด วันหยุด สินค้า บริการเสริม และสิทธิ์ทีมงานจากระบบเดียว',
+    title: 'จัดการตลาดและพื้นที่ขาย',
+    description: 'เพิ่มตลาด โซน ล็อก บูธ ราคา และประเภทสินค้าที่ขายได้',
     icon: Building2,
   },
   {
-    title: 'Mobile booking ที่พร้อมขายจริง',
-    description: 'ผู้ค้าเลือกวัน เลือกบูธ ชำระเงิน และติดตามสถานะผ่านมือถือโดยไม่ต้องผ่านงานเอกสาร',
-    icon: PhoneCall,
+    title: 'ระบบจองพื้นที่ขาย',
+    description: 'ผู้ค้าดูล็อกว่าง เลือกวันที่ เลือกบูธ ส่งคำขอจอง และติดตามสถานะ',
+    icon: CalendarDays,
   },
   {
-    title: 'บัญชีและภาษีที่ตามทันการเติบโต',
-    description: 'รองรับเอกสารบัญชี รายงานภาษีขาย ลูกหนี้ค้างชำระ และการต่อยอดสู่การออกใบเสร็จในอนาคต',
+    title: 'ระบบชำระเงิน',
+    description: 'รองรับ QR Payment, การแนบหลักฐาน และเชื่อมข้อมูลการจองกับยอดเงิน',
     icon: CreditCard,
   },
   {
-    title: 'โครงสร้างข้อมูลพร้อม scale',
-    description: 'ออกแบบให้รองรับหลายองค์กร หลายตลาด และการตั้งค่าค่าบริการ subscription แบบคิด usage เพิ่มได้',
-    icon: ChartColumnIncreasing,
+    title: 'จัดการผู้ค้า',
+    description: 'เก็บข้อมูลผู้ค้า ประวัติการจอง ประเภทสินค้าที่ขาย และสถานะการใช้งาน',
+    icon: UsersRound,
+  },
+  {
+    title: 'ข่าวสารและประกาศ',
+    description: 'แจ้งข่าวสาร กฎตลาด วันหยุด วันเปิดตลาด หรือกิจกรรมพิเศษถึงผู้ค้า',
+    icon: Megaphone,
+  },
+  {
+    title: 'ตรวจตลาด / Audit',
+    description: 'ตรวจวันขาย ล็อกที่ขายจริง ประเภทสินค้า และบันทึกค่าปรับได้เป็นระบบ',
+    icon: ShieldCheck,
+  },
+];
+
+const roleCards = [
+  {
+    title: 'เจ้าของตลาด / แอดมิน',
+    description: 'จัดการตลาด พื้นที่ขาย การจอง ผู้ค้า การชำระเงิน และรายงานได้ในระบบเดียว',
+    icon: MonitorSmartphone,
+  },
+  {
+    title: 'พ่อค้าแม่ค้า',
+    description: 'ค้นหาตลาด ดูรายละเอียด เลือกวันขาย จองพื้นที่ ติดตามข่าวสาร และดูสถานะการจองได้ง่าย',
+    icon: Store,
+  },
+  {
+    title: 'เจ้าหน้าที่ตรวจตลาด',
+    description: 'ตรวจสอบการเข้าใช้พื้นที่จริง ตรวจล็อก ตรวจวันขาย และตรวจประเภทสินค้าได้สะดวกขึ้น',
+    icon: ScanLine,
+  },
+];
+
+const targetCustomers = [
+  'ตลาดนัด',
+  'ตลาดสด',
+  'ตลาดกลางคืน',
+  'ตลาดเปิดท้าย',
+  'ตลาดชุมชน',
+  'Food Court',
+  'พื้นที่ให้เช่าขายของ',
+  'งานอีเวนต์ / งานแฟร์',
+  'ผู้จัดงานขายของชั่วคราว',
+  'องค์กรที่มีพื้นที่ขายสินค้า',
+];
+
+const benefitItems = [
+  'ลดงานแอดมิน',
+  'ลดการตอบคำถามซ้ำ',
+  'ลดปัญหาจองซ้ำ',
+  'ลดความผิดพลาดจากการจดมือ',
+  'เก็บข้อมูลผู้ค้าเป็นระบบ',
+  'ตรวจสอบรายได้ง่ายขึ้น',
+  'ผู้ค้าจองเองได้สะดวกขึ้น',
+  'ตลาดดูเป็นมืออาชีพมากขึ้น',
+  'ตรวจสอบหน้างานได้ดีขึ้น',
+  'รองรับการเติบโตของตลาด',
+];
+
+const howItWorks = [
+  {
+    step: '01',
+    title: 'ตั้งค่าตลาด',
+    description: 'เพิ่มข้อมูลตลาด โซน ล็อก ราคา และประเภทสินค้าที่อนุญาตให้ขาย',
+  },
+  {
+    step: '02',
+    title: 'เปิดให้ผู้ค้าจอง',
+    description: 'ผู้ค้าดูรายละเอียด เลือกวัน เลือกล็อก และจองพื้นที่ผ่านระบบ',
+  },
+  {
+    step: '03',
+    title: 'จัดการและตรวจสอบ',
+    description: 'แอดมินตรวจสอบการจอง การชำระเงิน รายงาน และเจ้าหน้าที่ตรวจหน้างาน',
   },
 ];
 
@@ -454,25 +548,26 @@ export default function App() {
   }).format(Number(overview?.paidAmountToday || 0));
 
   return (
-    <div className="min-h-screen bg-[var(--color-ink)] text-slate-900">
+    <div className="min-h-screen bg-slate-50 text-slate-900">
       <div className="landing-noise" />
 
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-[rgba(8,15,26,0.82)] backdrop-blur-xl">
+      <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
-          <a href="#" aria-label="Jonglock" className="flex items-center">
+          <a href="#" aria-label="Jonglock" className="flex items-center rounded-2xl bg-[var(--color-ink)] px-3 py-2">
             <img src={jonglockLogoWhite} alt="Jonglock ระบบจองพื้นที่ขาย" className="h-16 w-auto object-contain sm:h-20" />
           </a>
 
-          <nav className="hidden items-center gap-8 text-sm text-slate-300 lg:flex">
-            <a href="#features" className="hover:text-white">ฟีเจอร์</a>
-            <a href="#pricing" className="hover:text-white">แพ็คเกจ</a>
-            <a href="#signup" className="hover:text-white">สมัครใช้งาน</a>
+          <nav className="hidden items-center gap-8 text-sm font-semibold text-slate-600 lg:flex">
+            <a href="#features" className="hover:text-[var(--color-accent)]">ฟีเจอร์</a>
+            <a href="#preview" className="hover:text-[var(--color-accent)]">ตัวอย่างระบบ</a>
+            <a href="#pricing" className="hover:text-[var(--color-accent)]">แพ็คเกจ</a>
+            <a href="#signup" className="hover:text-[var(--color-accent)]">สมัครใช้งาน</a>
           </nav>
 
           <button
             type="button"
             onClick={scrollToSignup}
-            className="inline-flex h-11 items-center justify-center rounded-full bg-white px-5 text-sm font-semibold text-[var(--color-ink)] transition hover:bg-[var(--color-sand)]"
+            className="inline-flex h-11 items-center justify-center rounded-full bg-[var(--color-accent)] px-5 text-sm font-semibold text-white transition hover:bg-[var(--color-accent-deep)]"
           >
             เริ่มทดลองใช้ฟรี
           </button>
@@ -480,40 +575,32 @@ export default function App() {
       </header>
 
       <main>
-        <section className="relative overflow-hidden px-5 pb-20 pt-14 lg:px-8 lg:pt-20">
+        <section className="relative overflow-hidden px-5 py-14 lg:px-8 lg:py-20">
           <div className="hero-orb hero-orb-left" />
           <div className="hero-orb hero-orb-right" />
-          <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-2 text-sm text-white">
-                <Sparkles className="h-4 w-4 text-[var(--color-accent)]" />
-                Subscription-ready platform for modern market operators
+              <div className="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-white px-4 py-2 text-sm font-semibold text-[var(--color-accent-deep)] shadow-sm">
+                <Sparkles className="h-4 w-4" />
+                ระบบจองพื้นที่ขายสำหรับตลาดยุคใหม่
               </div>
 
               <div className="space-y-5">
-                {/* <h1 className="max-w-4xl font-display text-5xl font-semibold leading-[1.02] text-white sm:text-6xl lg:text-7xl">
-                  ระบบจัดการธุรกิจตลาด
-                  <span className="block whitespace-nowrap text-[var(--color-accent-soft)]">
-                    และพื้นที่ขายที่ครบวงจร
-                  </span>
-                </h1> */}
-                <h1 className="max-w-4xl font-display text-5xl font-semibold leading-[1.02] text-white sm:text-6xl lg:text-7xl">
+                <h1 className="max-w-4xl font-display text-5xl font-semibold leading-[1.03] text-slate-950 sm:text-6xl lg:text-7xl">
                   เลิกจองล็อกผ่านแชท
-                  <span className="block whitespace-nowrap text-[var(--color-accent-soft)]">
-                    จัดการตลาดได้ครบ<br />ในระบบเดียว
-                  </span>
+                  <span className="block text-[var(--color-accent)]">จัดการตลาดได้ครบในระบบเดียว</span>
                 </h1>
-                <p className="max-w-2xl text-lg leading-8 text-slate-200">
+                <p className="max-w-2xl text-lg leading-8 text-slate-600">
                   JongLock ช่วยเจ้าของตลาดจัดการล็อกว่าง การจองพื้นที่ ผู้ค้า การชำระเงิน ข่าวสาร และการตรวจตลาด ให้เป็นระบบ ลดงานแอดมิน ลดปัญหาจองซ้ำ และดูรายงานได้ง่ายขึ้น
                 </p>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-3">
                 {highlights.map(({ label, value, icon: Icon }) => (
-                  <div key={label} className="rounded-3xl border border-white/10 bg-white/6 p-5 shadow-[0_24px_80px_rgba(1,8,20,0.28)]">
+                  <div key={label} className="rounded-3xl border border-slate-200 bg-white p-5 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
                     <Icon className="mb-4 h-5 w-5 text-[var(--color-accent)]" />
-                    <p className="text-sm text-slate-300">{label}</p>
-                    <p className="mt-2 text-lg font-semibold text-white">{value}</p>
+                    <p className="text-sm text-slate-500">{label}</p>
+                    <p className="mt-2 text-lg font-semibold text-slate-950">{value}</p>
                   </div>
                 ))}
               </div>
@@ -522,249 +609,197 @@ export default function App() {
                 <button
                   type="button"
                   onClick={scrollToSignup}
-                  className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-7 text-base font-semibold text-white transition hover:bg-[var(--color-accent-deep)]"
+                  className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-7 text-base font-semibold text-white shadow-[0_18px_45px_rgba(17,148,131,0.25)] transition hover:bg-[var(--color-accent-deep)]"
                 >
-                  สมัครใช้งาน
+                  ขอทดลองใช้งาน
                   <ArrowRight className="h-5 w-5" />
                 </button>
-                {/* <a
-                  href={MANAGEMENT_APP_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex h-14 items-center justify-center rounded-full border border-white/12 bg-white/6 px-7 text-base font-semibold text-white transition hover:bg-white/10"
-                >
-                  ดูระบบจัดการ
-                </a> */}
                 <a
                   href={DEMO_LOGIN_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex h-14 items-center justify-center rounded-full bg-white px-7 text-base font-semibold text-slate-950 transition hover:bg-slate-100"
+                  className="inline-flex h-14 items-center justify-center rounded-full border border-slate-300 bg-white px-7 text-base font-semibold text-slate-950 transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
                 >
-                  ตัวอย่างระบบ
+                  ดูตัวอย่างระบบ
                 </a>
-              </div>
-              <div className="rounded-3xl border border-white/10 bg-white/8 p-4 text-sm text-slate-200">
-                <p className="font-semibold text-white">บัญชีทดสอบ Demo</p>
-                <div className="mt-3 grid gap-2 sm:grid-cols-3">
-                  <p>รหัสองค์กร: <span className="font-semibold text-[var(--color-accent-soft)]">{DEMO_ACCOUNT.organizationCode}</span></p>
-                  <p>Username: <span className="font-semibold text-[var(--color-accent-soft)]">{DEMO_ACCOUNT.username}</span></p>
-                  <p>Password: <span className="font-semibold text-[var(--color-accent-soft)]">{DEMO_ACCOUNT.password}</span></p>
-                </div>
               </div>
             </div>
 
-            <div className="hero-panel">
+            <div className="hero-product-card">
               <div className="hero-panel-header">
                 <span className="hero-dot bg-emerald-400" />
                 <span className="hero-dot bg-amber-400" />
                 <span className="hero-dot bg-rose-400" />
               </div>
-
-              <div className="grid gap-4 lg:grid-cols-1">
-                <section className="hero-surface hero-surface-primary">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm uppercase tracking-[0.24em] text-slate-400">Operations</p>
-                      <h2 className="mt-2 text-2xl font-semibold text-white">ตลาดพร้อมเปิดจอง</h2>
-                    </div>
-                    <BadgeCheck className="h-8 w-8 text-[var(--color-accent)]" />
-                  </div>
-
-                  <div className="mt-6 grid gap-3">
-                    <div className="rounded-2xl bg-white/6 p-4">
-                      <div className="flex items-center justify-between">
-                        <p className="text-sm text-slate-300">อัตราการใช้บูธวันนี้</p>
-                        <p className="text-sm font-semibold text-emerald-300">{overview?.occupancyRateToday ?? 0}%</p>
-                      </div>
-                      <div className="mt-3 h-2 rounded-full bg-white/8">
-                        <div className="h-2 rounded-full bg-[var(--color-accent)] transition-all" style={{ width: `${overview?.occupancyRateToday ?? 0}%` }} />
-                      </div>
-                    </div>
-
-                    <div className="grid gap-3 sm:grid-cols-3">
-                      <div className="rounded-2xl bg-white/6 p-4">
-                        <p className="text-sm text-slate-300">บูธเปิดใช้งาน</p>
-                        <p className="mt-2 text-3xl font-semibold leading-none text-white">{overview?.activeBooths ?? 0}</p>
-                      </div>
-                      <div className="rounded-2xl bg-white/6 p-4">
-                        <p className="text-sm text-slate-300">ตลาดที่เปิดอยู่</p>
-                        <p className="mt-2 text-3xl font-semibold leading-none text-white">{overview?.activeMarkets ?? 0}</p>
-                      </div>
-                      <div className="rounded-2xl bg-white/6 p-4">
-                        <p className="text-sm text-slate-300">ยอดชำระวันนี้</p>
-                        <p className="mt-2 whitespace-nowrap text-3xl font-semibold leading-none text-white">{paidAmountTodayLabel}</p>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                <section className="hero-surface hero-surface-secondary">
-                  <div className="grid gap-4">
-                    <div className="rounded-2xl bg-[var(--color-sand)] p-5 text-[var(--color-ink)]">
-                      <p className="text-sm font-medium">เริ่มต้นใช้งาน</p>
-                      <p className="mt-2 whitespace-nowrap text-3xl font-semibold leading-tight">ใช้ฟรี 3 เดือน</p>
-                      <p className="mt-2 text-sm text-slate-700">เปิดระบบให้ทดลองใช้งานก่อนเริ่มคิดค่าบริการ</p>
-                    </div>
-                     <div className="grid gap-3 sm:grid-cols-3">
-                     {/* <div className="rounded-2xl border border-slate-200 bg-white/80 p-4">
-                        <div className="flex items-center gap-3">
-                          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgba(17,148,131,0.1)]">
-                            <Building2 className="h-5 w-5 text-[var(--color-accent)]" />
-                          </span>
-                          <div className="min-w-0">
-                            <p className="text-xs font-medium leading-5 text-slate-600">องค์กรที่เปิดใช้งาน</p>
-                            <p className="mt-1 text-3xl font-semibold leading-none text-slate-950">{overview?.activeOrganizations ?? 0}</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="rounded-2xl border border-slate-200 bg-white/80 p-4">
-                        <div className="flex items-center gap-3">
-                          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgba(17,148,131,0.1)]">
-                            <MapPinned className="h-5 w-5 text-[var(--color-accent)]" />
-                          </span>
-                          <div className="min-w-0">
-                            <p className="text-xs font-medium leading-5 text-slate-600">ตลาดที่เปิดอยู่</p>
-                            <p className="mt-1 text-3xl font-semibold leading-none text-slate-950">{overview?.activeMarkets ?? 0}</p>
-                          </div>
-                        </div>
-                      </div>*/}
-                      <div className="rounded-2xl border border-slate-200 bg-white/80 p-4">
-                        <div className="flex items-center gap-3">
-                          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgba(17,148,131,0.1)]">
-                            <Eye className="h-5 w-5 text-[var(--color-accent)]" />
-                          </span>
-                          <div className="min-w-0">
-                            <p className="text-xs font-medium leading-5 text-slate-600">ผู้เข้าชมวันนี้</p>
-                            <p className="mt-1 text-3xl font-semibold leading-none text-slate-950">{overview?.landingVisitorsToday ?? 0}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div> 
-                  </div>
-                </section>
+              <div className="hero-dashboard-frame">
+                <img src={managementDashboardPreview} alt="ตัวอย่างระบบจัดการ Jonglock" className="h-full w-full object-cover object-top" />
+              </div>
+              <div className="hero-phone-stack">
+                <img src={appMarketListPreview} alt="หน้ารายการตลาดในแอป Jonglock" />
+                <img src={appBoothGridPreview} alt="หน้าเลือกบูธในแอป Jonglock" />
+              </div>
+              <div className="hero-stat-card">
+                <p>เริ่มต้นใช้งาน</p>
+                <strong>ใช้ฟรี 3 เดือน</strong>
+                <span>พร้อมทดลองครบทุกฟังก์ชัน</span>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-5 pb-8 lg:px-8">
-          <div className="rounded-[2rem] border border-white/10 bg-white/8 p-6 shadow-[0_24px_80px_rgba(1,8,20,0.22)] backdrop-blur-xl lg:p-8">
-            <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-              <div>
-                <p className="section-kicker">Real operations experience</p>
-                <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-white lg:text-4xl">
-                  พัฒนาจากประสบการณ์ดูแลพื้นที่ตลาดจริง
-                </h2>
-                <p className="mt-4 text-base leading-8 text-slate-300">
-                  ทีมพัฒนามีประสบการณ์ดูแลและพัฒนาระบบบริหารพื้นที่ตลาดสำหรับอาคารสำนักงาน
-                  จึงออกแบบ Jonglock ให้รองรับงานปฏิบัติการ บัญชี และการตรวจสอบในสถานการณ์ใช้งานจริง
-                </p>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-3">
-                {experienceItems.map((item) => (
-                  <div key={item} className="rounded-3xl border border-white/12 bg-white/10 p-5">
-                    <CheckCircle2 className="h-5 w-5 text-[var(--color-accent-soft)]" />
-                    <p className="mt-4 text-lg font-semibold text-white">{item}</p>
-                    <p className="mt-2 text-sm leading-6 text-slate-300">ประสบการณ์จากงานบริหารพื้นที่ขายจริง</p>
-                  </div>
-                ))}
-              </div>
+        <section className="bg-white px-5 py-20 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="section-kicker">Pain points</p>
+              <h2 className="section-title">ตลาดของคุณยังเจอปัญหาแบบนี้อยู่ไหม?</h2>
+              <p className="section-copy">ปัญหาที่ดูเล็กในแต่ละวัน มักกลายเป็นต้นทุนเวลา ความผิดพลาด และประสบการณ์ที่ไม่ดีของผู้ค้า</p>
+            </div>
+            <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {painPoints.map(({ title, description, icon: Icon }) => (
+                <article key={title} className="pain-card">
+                  <Icon className="h-5 w-5 text-rose-500" />
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
 
-        <section id="features" className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
-          <div className="section-heading">
-            <p className="section-kicker">What the system handles</p>
-            <h2 className="section-title section-title-light whitespace-nowrap">โครงสร้างที่พร้อมทั้งงานปฏิบัติการและการเงิน</h2>
-            <p className="section-copy section-copy-light">
-              หน้า landing นี้ไม่ได้ขายแค่ภาพลักษณ์ แต่สื่อให้เห็นว่า product มีโครงสร้างพร้อมใช้งานจริง
-              ตั้งแต่การจัดการตลาดไปจนถึง subscription lifecycle
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            {featureCards.map(({ title, description, icon: Icon }) => (
-              <article key={title} className="feature-card">
-                <div className="feature-icon">
-                  <Icon className="h-5 w-5 text-[var(--color-accent)]" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-semibold text-slate-900">{title}</h3>
-                  <p className="mt-3 text-base leading-8 text-slate-600">{description}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-7xl px-5 py-8 lg:px-8">
-          <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-            <div className="rounded-[2rem] bg-white p-7 shadow-[0_24px_70px_rgba(15,23,42,0.08)] lg:p-8">
-              <p className="section-kicker">Why Jonglock</p>
-              <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-slate-950 lg:text-4xl">
-                แก้ปัญหาที่เกิดขึ้นจริงในการบริหารตลาด
+        <section className="px-5 py-20 lg:px-8">
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div className="rounded-[2rem] border border-slate-200 bg-white p-7 shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
+              <p className="section-kicker">Solution</p>
+              <h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-slate-950">
+                JongLock เปลี่ยนการจัดการตลาดให้เป็นระบบออนไลน์
               </h2>
-              <div className="mt-8 space-y-4">
-                {problems.map((item) => (
-                  <article key={item.title} className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
-                    <h3 className="text-lg font-semibold text-slate-950">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-7 text-slate-600">{item.description}</p>
-                  </article>
-                ))}
+              <p className="mt-5 text-base leading-8 text-slate-600">
+                รวมงานจองพื้นที่ ผังบูธ ผู้ค้า การชำระเงิน ข่าวสาร และการตรวจตลาดไว้ใน workflow เดียว เพื่อให้ทีมตลาดทำงานเร็วขึ้นและตรวจสอบย้อนหลังได้ชัดเจน
+              </p>
+              <div className="mt-8 grid gap-4 sm:grid-cols-3">
+                <div className="solution-metric"><strong>{overview?.activeMarkets ?? 0}</strong><span>ตลาดที่เปิดอยู่</span></div>
+                <div className="solution-metric"><strong>{overview?.activeBooths ?? 0}</strong><span>บูธเปิดใช้งาน</span></div>
+                <div className="solution-metric"><strong>{overview?.landingVisitorsToday ?? 0}</strong><span>ผู้เข้าชมวันนี้</span></div>
               </div>
             </div>
+            <div className="grid gap-5 sm:grid-cols-3">
+              {roleCards.map(({ title, description, icon: Icon }) => (
+                <article key={title} className="role-card">
+                  <span><Icon className="h-6 w-6" /></span>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            <div className="rounded-[2rem] bg-white p-7 shadow-[0_24px_70px_rgba(15,23,42,0.08)] lg:p-8">
-              <p className="section-kicker">Built for</p>
-              <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-slate-950 lg:text-4xl">
-                เหมาะกับทีมที่ต้องดูแลพื้นที่ขายอย่างเป็นระบบ
-              </h2>
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {audiences.map((item) => (
-                  <div key={item} className="flex items-start gap-3 rounded-2xl border border-slate-200 p-4">
-                    <BadgeCheck className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-accent)]" />
-                    <p className="text-base font-semibold leading-7 text-slate-800">{item}</p>
-                  </div>
-                ))}
-              </div>
+        <section id="features" className="bg-white px-5 py-20 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="section-kicker">Core features</p>
+              <h2 className="section-title">ฟีเจอร์หลักสำหรับระบบจอง JongLock</h2>
+              <p className="section-copy">ออกแบบให้ครอบคลุมงานของตลาดตั้งแต่ตั้งค่าพื้นที่ เปิดจอง รับชำระเงิน ไปจนถึงตรวจหน้างาน</p>
+            </div>
+            <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {coreFeatures.map(({ title, description, icon: Icon }) => (
+                <article key={title} className="feature-module-card">
+                  <span><Icon className="h-6 w-6" /></span>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="px-5 py-20 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="section-kicker">For market operators</p>
+              <h2 className="section-title">เหมาะกับใครบ้าง?</h2>
+              <p className="section-copy">JongLock เหมาะกับธุรกิจหรือองค์กรที่มีพื้นที่ขายและต้องการบริหารข้อมูลให้เป็นระบบมากขึ้น</p>
+            </div>
+            <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+              {targetCustomers.map((item) => (
+                <div key={item} className="target-pill">
+                  <Store className="h-4 w-4" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white px-5 py-20 lg:px-8">
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
+            <div>
+              <p className="section-kicker">Benefits</p>
+              <h2 className="section-title">ทำไมเจ้าของตลาดควรเลือกใช้ JongLock?</h2>
+              <p className="section-copy">
+                ระบบไม่ได้ช่วยแค่เปิดจองออนไลน์ แต่ช่วยทำให้ข้อมูลตลาด ผู้ค้า และการเงินมีโครงสร้างพร้อมต่อยอดในระยะยาว
+              </p>
               <button
                 type="button"
                 onClick={scrollToSignup}
-                className="mt-8 inline-flex h-14 items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-6 text-base font-semibold text-white transition hover:bg-[var(--color-accent-deep)]"
+                className="mt-8 inline-flex h-14 items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-7 text-base font-semibold text-white transition hover:bg-[var(--color-accent-deep)]"
               >
-                เริ่มทดลองใช้ฟรี 3 เดือน
+                ขอเริ่มทดลองใช้งาน
                 <ArrowRight className="h-5 w-5" />
               </button>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {benefitItems.map((item) => (
+                <div key={item} className="benefit-card">
+                  <BadgeCheck className="h-5 w-5 text-[var(--color-accent)]" />
+                  <span>{item}</span>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        <section id="app-preview" className="mx-auto max-w-7xl px-5 py-14 lg:px-8">
-          <div className="rounded-[2.5rem] border border-white/10 bg-white p-5 shadow-[0_30px_100px_rgba(2,8,23,0.18)] lg:p-8">
-            <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
-              <div className="space-y-6">
-                <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[rgba(17,148,131,0.12)] text-[var(--color-accent)]">
-                  <MonitorSmartphone className="h-7 w-7" />
-                </div>
-                <div>
-                  <p className="section-kicker">Web Admin + Mobile App</p>
-                  <h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-slate-950 lg:text-5xl">
-                    เห็นภาพการใช้งานจริงทั้งระบบจัดการและแอปฯ ผู้ค้า
-                  </h2>
-                  <p className="mt-5 max-w-xl text-base leading-8 text-slate-600">
-                    ผู้ดูแลจัดการตลาด บูธ รายงาน และบัญชีผ่าน Web Admin ส่วนผู้ค้าใช้แอปฯ เพื่อค้นหาตลาด เลือกบูธ ยืนยันรายการ และติดตามการชำระเงินได้ใน flow เดียวกัน
-                  </p>
-                </div>
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <StoreBadge href={PLAY_STORE_URL} icon={Play} eyebrow="Get it on" label="Google Play" />
-                  <StoreBadge href={APP_STORE_URL} disabled icon={Apple} eyebrow="Download on the" label="App Store" />
-                </div>
-                <p className="text-sm font-semibold text-slate-500">Android พร้อมใช้งานก่อน ส่วน iOS อยู่ระหว่างเตรียมเผยแพร่</p>
-              </div>
+        <section className="px-5 py-20 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="section-kicker">How it works</p>
+              <h2 className="section-title">เริ่มใช้งานง่าย ๆ ใน 3 ขั้นตอน</h2>
+              <p className="section-copy">ตั้งค่าข้อมูลพื้นฐาน เปิดให้ผู้ค้าจอง และจัดการงานหลังบ้านต่อได้ทันที</p>
+            </div>
+            <div className="mt-12 grid gap-5 lg:grid-cols-3">
+              {howItWorks.map((item) => (
+                <article key={item.step} className="step-card">
+                  <span>{item.step}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
 
-              <div className="rounded-[2rem] border border-slate-200 bg-slate-50 p-3 shadow-inner">
+        <section id="preview" className="bg-white px-5 py-20 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="section-kicker">Product preview</p>
+              <h2 className="section-title">ตัวอย่างระบบจัดการและแอปฯ ผู้ค้า</h2>
+              <p className="section-copy">ดูภาพรวมการใช้งานจริงทั้งฝั่ง Web Admin และ Mobile App ใน flow เดียวกัน</p>
+            </div>
+            <div className="mt-12 rounded-[2.5rem] border border-slate-200 bg-slate-50 p-5 shadow-[0_30px_100px_rgba(15,23,42,0.10)] lg:p-8">
+              <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+                <div>
+                  <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[rgba(17,148,131,0.12)] text-[var(--color-accent)]">
+                    <MonitorSmartphone className="h-7 w-7" />
+                  </div>
+                  <h3 className="mt-5 font-display text-4xl font-semibold leading-tight text-slate-950">Web Admin + Mobile App</h3>
+                  <p className="mt-5 max-w-xl text-base leading-8 text-slate-600">
+                    ผู้ดูแลจัดการตลาด บูธ รายงาน และบัญชีผ่าน Web Admin ส่วนผู้ค้าใช้แอปฯ เพื่อค้นหาตลาด เลือกบูธ ยืนยันรายการ และติดตามการชำระเงิน
+                  </p>
+                  <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <StoreBadge href={PLAY_STORE_URL} icon={Play} eyebrow="Get it on" label="Google Play" />
+                    <StoreBadge href={APP_STORE_URL} disabled icon={Apple} eyebrow="Download on the" label="App Store" />
+                  </div>
+                </div>
                 <div className="grid gap-3 sm:grid-cols-3">
                   {[
                     { src: appMarketListPreview, alt: 'ตัวอย่างแอป Jonglock หน้ารายการตลาด' },
@@ -777,20 +812,14 @@ export default function App() {
                   ))}
                 </div>
               </div>
-            </div>
-
-            <div className="mt-8 grid gap-5">
-              <figure className="h-[360px] overflow-hidden rounded-[1.75rem] border border-slate-200 bg-slate-50 shadow-[0_22px_60px_rgba(15,23,42,0.10)] sm:h-[440px] lg:h-[560px]">
-                <img
-                  src={managementDashboardPreview}
-                  alt="ตัวอย่าง Dashboard ระบบจัดการ Jonglock"
-                  className="h-full w-full object-cover object-top"
-                  loading="lazy"
-                />
-              </figure>
-              <figure className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-slate-50 shadow-[0_22px_60px_rgba(15,23,42,0.10)]">
-                <img src={managementBoothsPreview} alt="ตัวอย่างหน้าจัดการบูธ Jonglock" className="w-full object-cover object-top" loading="lazy" />
-              </figure>
+              <div className="mt-8 grid gap-5">
+                <figure className="h-[360px] overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_22px_60px_rgba(15,23,42,0.10)] sm:h-[440px] lg:h-[560px]">
+                  <img src={managementDashboardPreview} alt="ตัวอย่าง Dashboard ระบบจัดการ Jonglock" className="h-full w-full object-cover object-top" loading="lazy" />
+                </figure>
+                <figure className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_22px_60px_rgba(15,23,42,0.10)]">
+                  <img src={managementBoothsPreview} alt="ตัวอย่างหน้าจัดการบูธ Jonglock" className="w-full object-cover object-top" loading="lazy" />
+                </figure>
+              </div>
             </div>
           </div>
         </section>
@@ -798,7 +827,7 @@ export default function App() {
         <section id="pricing" className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
           <div className="section-heading">
             <p className="section-kicker">แพ็คเกจ</p>
-            <h2 className="section-title section-title-light whitespace-nowrap">แพ็กเกจที่พร้อมต่อยอดเป็นระบบค่าบริการ</h2>
+            <h2 className="section-title whitespace-nowrap">แพ็กเกจที่พร้อมต่อยอดเป็นระบบค่าบริการ</h2>
           </div>
 
           {loadingPlans ? <div className="empty-panel">กำลังโหลดข้อมูลแพ็คเกจ...</div> : null}
@@ -1039,7 +1068,7 @@ export default function App() {
           </div>
         </section>
       </main>
-      <footer className="border-t border-white/10 px-5 py-8 text-center text-xs font-semibold uppercase tracking-[0.22em] text-slate-500 lg:px-8">
+      <footer className="border-t border-slate-200 px-5 py-8 text-center text-xs font-semibold uppercase tracking-[0.22em] text-slate-500 lg:px-8">
         {POWERED_BY_TEXT}
       </footer>
     </div>

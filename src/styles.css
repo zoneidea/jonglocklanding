@@ -23,9 +23,9 @@ body {
   font-family: 'Noto Sans Thai', 'Plus Jakarta Sans', sans-serif;
   color: #0f172a;
   background:
-    radial-gradient(circle at top left, rgba(17, 148, 131, 0.24), transparent 24rem),
-    radial-gradient(circle at top right, rgba(239, 220, 194, 0.2), transparent 20rem),
-    linear-gradient(180deg, #08121f 0%, #0a1523 37%, #f4f6f9 37%, #f8fafc 100%);
+    radial-gradient(circle at top left, rgba(17, 148, 131, 0.16), transparent 28rem),
+    radial-gradient(circle at top right, rgba(239, 220, 194, 0.18), transparent 24rem),
+    linear-gradient(180deg, #eef8f6 0%, #f8fafc 42%, #eef3f8 100%);
 }
 
 #root {
@@ -42,10 +42,84 @@ body {
   inset: 0;
   opacity: 0.18;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(17, 148, 131, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 148, 131, 0.04) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.85), transparent 78%);
+}
+
+.hero-product-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(235, 248, 246, 0.9)),
+    radial-gradient(circle at 80% 18%, rgba(17, 148, 131, 0.18), transparent 18rem);
+  padding: 1.25rem;
+  box-shadow: 0 30px 100px rgba(15, 23, 42, 0.14);
+}
+
+.hero-dashboard-frame {
+  height: 23rem;
+  overflow: hidden;
+  border-radius: 1.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: white;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.16);
+}
+
+.hero-phone-stack {
+  position: absolute;
+  bottom: 1.4rem;
+  right: 1.4rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.hero-phone-stack img {
+  width: 8.6rem;
+  max-height: 18rem;
+  border-radius: 1.6rem;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: white;
+  box-shadow: 0 20px 55px rgba(15, 23, 42, 0.22);
+}
+
+.hero-phone-stack img:first-child {
+  transform: translateY(1.4rem) rotate(-3deg);
+}
+
+.hero-phone-stack img:last-child {
+  transform: rotate(3deg);
+}
+
+.hero-stat-card {
+  position: absolute;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  max-width: 15rem;
+  border-radius: 1.4rem;
+  background: #efdcc2;
+  padding: 1rem;
+  color: var(--color-ink);
+  box-shadow: 0 16px 44px rgba(15, 23, 42, 0.14);
+}
+
+.hero-stat-card p,
+.hero-stat-card span {
+  margin: 0;
+  display: block;
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.hero-stat-card strong {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 1.6rem;
+  line-height: 1.15;
 }
 
 .hero-orb {
@@ -157,6 +231,123 @@ body {
   padding: 1.6rem;
   box-shadow: 0 22px 60px rgba(15, 23, 42, 0.08);
   backdrop-filter: blur(18px);
+}
+
+.pain-card,
+.feature-module-card,
+.role-card,
+.benefit-card,
+.step-card,
+.target-pill {
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 18px 52px rgba(15, 23, 42, 0.06);
+}
+
+.pain-card,
+.feature-module-card,
+.role-card,
+.step-card {
+  border-radius: 1.6rem;
+  padding: 1.35rem;
+}
+
+.pain-card h3,
+.feature-module-card h3,
+.role-card h3,
+.step-card h3 {
+  margin: 1rem 0 0;
+  color: #0f172a;
+  font-size: 1.1rem;
+  line-height: 1.45;
+  font-weight: 800;
+}
+
+.pain-card p,
+.feature-module-card p,
+.role-card p,
+.step-card p {
+  margin: 0.7rem 0 0;
+  color: #64748b;
+  font-size: 0.94rem;
+  line-height: 1.8;
+}
+
+.feature-module-card span,
+.role-card span {
+  display: inline-flex;
+  height: 3rem;
+  width: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background: rgba(17, 148, 131, 0.11);
+  color: var(--color-accent);
+}
+
+.role-card {
+  min-height: 100%;
+}
+
+.solution-metric {
+  border-radius: 1.4rem;
+  background: #f1f5f9;
+  padding: 1rem;
+}
+
+.solution-metric strong {
+  display: block;
+  color: #0f172a;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.solution-metric span {
+  display: block;
+  margin-top: 0.5rem;
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.target-pill {
+  display: flex;
+  min-height: 4rem;
+  align-items: center;
+  gap: 0.65rem;
+  border-radius: 1.2rem;
+  padding: 0.9rem 1rem;
+  color: #0f766e;
+  font-weight: 800;
+}
+
+.benefit-card {
+  display: flex;
+  min-height: 4.25rem;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 1.25rem;
+  padding: 1rem;
+  color: #0f172a;
+  font-weight: 800;
+}
+
+.step-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 13rem;
+}
+
+.step-card span {
+  display: inline-flex;
+  height: 2.5rem;
+  min-width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: rgba(17, 148, 131, 0.11);
+  color: var(--color-accent);
+  font-weight: 800;
 }
 
 .feature-icon {
