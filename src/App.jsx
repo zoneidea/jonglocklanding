@@ -553,9 +553,9 @@ export default function App() {
 
       <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
-          <a href="#" aria-label="Jonglock" className="flex items-center rounded-2xl bg-[var(--color-ink)] px-3 py-2">
+          {/* <a href="#" aria-label="Jonglock" className="flex items-center rounded-2xl bg-[var(--color-ink)] px-3 py-2"> */}
             <img src={jonglockLogoWhite} alt="Jonglock ระบบจองพื้นที่ขาย" className="h-16 w-auto object-contain sm:h-20" />
-          </a>
+          {/* </a> */}
 
           <nav className="hidden items-center gap-8 text-sm font-semibold text-slate-600 lg:flex">
             <a href="#features" className="hover:text-[var(--color-accent)]">ฟีเจอร์</a>
@@ -649,7 +649,7 @@ export default function App() {
 
         <section className="bg-white px-5 py-20 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="mx-auto max-w-3xl text-center">
+            <div className="mx-auto max-w-6xl text-center">
               <p className="section-kicker">Pain points</p>
               <h2 className="section-title">ตลาดของคุณยังเจอปัญหาแบบนี้อยู่ไหม?</h2>
               <p className="section-copy">ปัญหาที่ดูเล็กในแต่ละวัน มักกลายเป็นต้นทุนเวลา ความผิดพลาด และประสบการณ์ที่ไม่ดีของผู้ค้า</p>
@@ -696,7 +696,7 @@ export default function App() {
 
         <section id="features" className="bg-white px-5 py-20 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="mx-auto max-w-3xl text-center">
+            <div className="mx-auto max-w-6xl text-center">
               <p className="section-kicker">Core features</p>
               <h2 className="section-title">ฟีเจอร์หลักสำหรับระบบจอง JongLock</h2>
               <p className="section-copy">ออกแบบให้ครอบคลุมงานของตลาดตั้งแต่ตั้งค่าพื้นที่ เปิดจอง รับชำระเงิน ไปจนถึงตรวจหน้างาน</p>
@@ -780,7 +780,7 @@ export default function App() {
 
         <section id="preview" className="bg-white px-5 py-20 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="mx-auto max-w-3xl text-center">
+            <div className="mx-auto max-w-4xl text-center">
               <p className="section-kicker">Product preview</p>
               <h2 className="section-title">ตัวอย่างระบบจัดการและแอปฯ ผู้ค้า</h2>
               <p className="section-copy">ดูภาพรวมการใช้งานจริงทั้งฝั่ง Web Admin และ Mobile App ใน flow เดียวกัน</p>
