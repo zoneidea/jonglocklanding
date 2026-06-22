@@ -37,7 +37,7 @@ import appMarketListPreview from './assets/showcase/app-market-list.svg';
 import appBoothGridPreview from './assets/showcase/app-booth-grid.svg';
 import appBoothDetailPreview from './assets/showcase/app-booth-detail.svg';
 import managementDashboardPreview from './assets/showcase/management-dashboard.webp';
-import managementBoothsPreview from './assets/showcase/management-booths.webp';
+import managementVisualPlanPreview from './assets/showcase/management-visual-plan.png';
 
 const API_BASE_URL = import.meta.env.VITE_PUBLIC_API_BASE_URL || 'https://jonglockapi.zonedevnode.com/api/public';
 const MANAGEMENT_APP_URL = import.meta.env.VITE_MANAGEMENT_APP_URL || 'https://management.jonglock.com';
@@ -817,7 +817,7 @@ export default function App() {
                   <img src={managementDashboardPreview} alt="ตัวอย่าง Dashboard ระบบจัดการ Jonglock" className="h-full w-full object-cover object-top" loading="lazy" />
                 </figure>
                 <figure className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_22px_60px_rgba(15,23,42,0.10)]">
-                  <img src={managementBoothsPreview} alt="ตัวอย่างหน้าจัดการบูธ Jonglock" className="w-full object-cover object-top" loading="lazy" />
+                  <img src={managementVisualPlanPreview} alt="ตัวอย่างหน้าแผนผังเสมือนจริง Jonglock" className="w-full object-cover object-top" loading="lazy" />
                 </figure>
               </div>
             </div>
