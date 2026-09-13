@@ -313,28 +313,6 @@ function formatQuota(value) {
   return new Intl.NumberFormat('th-TH').format(numericValue);
 }
 
-function formatPrice(value) {
-  return new Intl.NumberFormat('th-TH', { maximumFractionDigits: 0 }).format(Number(value || 0));
-}
-
-function getPlanPrice(plan, interval = 'monthly') {
-  const presentation = getPlanPresentation(plan);
-  const monthlyPrice = Number(presentation.monthlyPrice || plan.base_price || 0);
-  if (!monthlyPrice) {
-    return { price: 'ฟรี', note: 'ระยะทดลอง 3 เดือน', discountLabel: '' };
-  }
-  if (interval === 'yearly') {
-    const yearlyPrice = monthlyPrice * 12;
-    const discountedPrice = Math.round(yearlyPrice * 0.85);
-    return {
-      price: formatPrice(discountedPrice),
-      note: 'บาท/ปี',
-      discountLabel: `ประหยัด ${formatPrice(yearlyPrice - discountedPrice)} บาท`,
-    };
-  }
-  return { price: formatPrice(monthlyPrice), note: 'บาท/เดือน', discountLabel: '' };
-}
-
 function Input({ label, hint, children }) {
   return (
     <label className="block">
@@ -834,13 +812,12 @@ export default function App() {
           {planError ? <div className="empty-panel empty-panel-error">{planError.replaceAll('subscription', 'แพ็คเกจ')}</div> : null}
 
           {!loadingPlans && !planError ? (
-            <div className="mt-12 grid gap-6 lg:grid-cols-3">
-              {plans.map((plan) => {
+            <div className="mt-12 grid gap-6 lg:grid-cols-2">
+              {plans.filter((plan) => plan.code !== DEFAULT_PLAN_CODE).map((plan) => {
                 const active = plan.code === selectedPlan?.code;
                 const planPresentation = getPlanPresentation(plan);
                 const billingInterval = billingIntervals[plan.code] || 'monthly';
                 const hasPaidPrice = Number(planPresentation.monthlyPrice || plan.base_price || 0) > 0;
-                const price = getPlanPrice(plan, billingInterval);
                 return (
                   <article key={plan.code} className={`plan-card ${active ? 'plan-card-active' : ''}`}>
                     <div className="flex items-start justify-between gap-4">
@@ -865,15 +842,13 @@ export default function App() {
                           onClick={() => setPlanBillingInterval(plan.code, 'yearly')}
                           className={`h-10 rounded-full transition ${billingInterval === 'yearly' ? 'bg-white text-slate-950 shadow-sm' : 'hover:text-slate-950'}`}
                         >
-                          รายปี -15%
+                          รายปี
                         </button>
                       </div>
                     ) : null}
                     <div className="mt-6 flex items-end gap-2">
-                      <span className="font-display text-4xl font-semibold text-slate-950">{price.price}</span>
-                      <span className="pb-2 text-sm text-slate-500">{price.note}</span>
+                      <span className="font-display text-4xl font-semibold text-slate-950">N/A</span>
                     </div>
-                    {price.discountLabel ? <p className="mt-2 text-sm font-semibold text-emerald-700">{price.discountLabel}</p> : null}
                     <p className="mt-2 text-sm font-medium text-[var(--color-accent-deep)]">{planPresentation.trialLabel}</p>
                     <div className="mt-5 grid gap-3 rounded-2xl bg-slate-50 p-4 text-sm text-slate-700 sm:grid-cols-2">
                       <div>
