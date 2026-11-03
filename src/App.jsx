@@ -57,12 +57,12 @@ const POWERED_BY_TEXT = 'Powered by zone-idea innovation co.,ltd.';
 const LANDING_VISITOR_KEY = 'jonglock_landing_visitor_key';
 const PLAN_LABELS = {
   free_full_1y: {
-    badge: 'ทดลองใช้ฟรี',
-    name: 'ใช้ฟรี 3 เดือน',
+    badge: 'เริ่มต้นใช้งาน',
+    name: 'Free',
     description: 'เปิดใช้ทุกฟังก์ชันในช่วงเริ่มต้น เหมาะสำหรับทดลองระบบจริงก่อนเลือกแพ็คเกจ',
     monthlyPrice: 0,
     price: 'ฟรี',
-    priceNote: 'ระยะทดลอง 3 เดือน',
+    priceNote: 'สำหรับเริ่มต้นใช้งาน',
     trialLabel: 'ใช้งานได้ครบทุกฟังก์ชันในช่วงทดลอง',
     adminLimit: 'ไม่จำกัด',
   },
@@ -73,7 +73,7 @@ const PLAN_LABELS = {
     monthlyPrice: 999,
     price: '999',
     priceNote: 'บาท/เดือน',
-    trialLabel: 'เปิดใช้ฟรี 3 เดือนในช่วงแรก',
+    trialLabel: 'สำหรับเจ้าของตลาดและทีมบริหาร',
     adminLimit: '1',
   },
   growth: {
@@ -83,12 +83,12 @@ const PLAN_LABELS = {
     monthlyPrice: 1999,
     price: '1,999',
     priceNote: 'บาท/เดือน',
-    trialLabel: 'เปิดใช้ฟรี 3 เดือนในช่วงแรก',
+    trialLabel: 'สำหรับองค์กรที่บริหารหลายตลาด',
     adminLimit: '3',
   },
 };
 const FEATURE_LABELS = {
-  'Full function 3 months': 'ใช้งานได้ครบทุกฟังก์ชัน 3 เดือน',
+  'Full function 3 months': 'ใช้งานได้ครบทุกฟังก์ชันในช่วงทดลอง',
   'Full function 1 year': 'ใช้งานได้ครบทุกฟังก์ชันในช่วงทดลอง',
   'unlimited markets during trial': 'ไม่จำกัดจำนวนตลาดระหว่างทดลองใช้',
   'all management modules': 'ใช้งานเมนูระบบจัดการได้ครบ',
@@ -265,12 +265,12 @@ const audiences = [
 
 const faqItems = [
   {
-    question: 'Jonglock เหมาะกับตลาดแบบไหน',
-    answer: 'เหมาะกับตลาดนัด อาคารสำนักงาน พื้นที่เช่า และองค์กรที่ต้องจัดการหลายตลาดหรือหลายโซน พร้อมระบบจองบูธและรายงานบัญชี',
+    question: 'Jonglock คืออะไร และเหมาะกับใคร',
+    answer: 'Jonglock คือระบบบริหารตลาดสำหรับเจ้าของตลาด ผู้จัดการตลาด และเจ้าหน้าที่ดูแลตลาด ใช้จัดการแผนผังบูธ พื้นที่เช่า ผู้ค้า การจอง การชำระเงิน การตรวจตลาด และรายงานในระบบเดียว เหมาะกับตลาดนัด ตลาดสด พื้นที่เชิงพาณิชย์ และองค์กรที่ดูแลหลายตลาด',
   },
   {
-    question: 'ผู้ค้าจองพื้นที่ขายผ่านแอปได้ไหม',
-    answer: 'ผู้ค้าสามารถเลือกตลาด เลือกวัน เลือกบูธ ยืนยันการจอง และแนบหลักฐานการชำระเงินผ่านแอปได้',
+    question: 'ระบบช่วยผู้ดูแลตลาดลดงานรับจองได้อย่างไร',
+    answer: 'ผู้ดูแลตลาดกำหนดบูธ ราคา และวันเปิดขาย จากนั้นให้ผู้ค้าเลือกวัน เลือกบูธ และแนบหลักฐานการชำระเงินผ่านแอป ทีมงานจึงตรวจสอบรายการจองและการชำระเงินได้จากระบบจัดการเดียว',
   },
   {
     question: 'รองรับหลายตลาดในองค์กรเดียวหรือไม่',
@@ -298,7 +298,7 @@ function getPlanPresentation(plan) {
     description: plan.description,
     price: plan.price_display_label || 'รอราคา',
     priceNote: 'รอประกาศราคา',
-    trialLabel: 'เปิดใช้ฟรี 3 เดือนในช่วงแรก',
+    trialLabel: 'สำหรับเจ้าของตลาดและทีมบริหาร',
   };
 }
 
@@ -560,16 +560,16 @@ export default function App() {
             <div className="space-y-8">
               <div className="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-white px-4 py-2 text-sm font-semibold text-[var(--color-accent-deep)] shadow-sm">
                 <Sparkles className="h-4 w-4" />
-                ระบบจองพื้นที่ขายสำหรับตลาดยุคใหม่
+                ระบบบริหารตลาดสำหรับเจ้าของและผู้ดูแลตลาด
               </div>
 
               <div className="space-y-5">
                 <h1 className="max-w-4xl font-display text-5xl font-semibold leading-[1.03] text-slate-950 sm:text-6xl lg:text-7xl">
-                  เลิกจองล็อกผ่านแชท
+                  Jonglock ระบบบริหารตลาด
                   <span className="block text-[var(--color-accent)]">จัดการตลาดได้ครบในระบบเดียว</span>
                 </h1>
                 <p className="max-w-2xl text-lg leading-8 text-slate-600">
-                  JongLock ช่วยเจ้าของตลาดจัดการล็อกว่าง การจองพื้นที่ ผู้ค้า การชำระเงิน ข่าวสาร และการตรวจตลาด ให้เป็นระบบ ลดงานแอดมิน ลดปัญหาจองซ้ำ และดูรายงานได้ง่ายขึ้น
+                  Jonglock คือระบบบริหารตลาดสำหรับเจ้าของตลาด ผู้จัดการตลาด และเจ้าหน้าที่ดูแลตลาด รวมแผนผังบูธ พื้นที่เช่า การจอง ผู้ค้า การชำระเงิน และการตรวจตลาดไว้ในระบบเดียว ช่วยลดงานแอดมิน ตรวจสอบรายได้ และดูแลหลายตลาดได้เป็นระบบ
                 </p>
               </div>
 
@@ -615,11 +615,6 @@ export default function App() {
               <div className="hero-phone-stack">
                 <img src={appMarketListPreview} alt="หน้ารายการตลาดในแอป Jonglock" />
                 <img src={appBoothGridPreview} alt="หน้าเลือกบูธในแอป Jonglock" />
-              </div>
-              <div className="hero-stat-card">
-                <p>เริ่มต้นใช้งาน</p>
-                <strong>ใช้ฟรี 3 เดือน</strong>
-                <span>พร้อมทดลองครบทุกฟังก์ชัน</span>
               </div>
             </div>
           </div>
@@ -805,7 +800,7 @@ export default function App() {
         <section id="pricing" className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
           <div className="section-heading">
             <p className="section-kicker">แพ็คเกจ</p>
-            <h2 className="section-title whitespace-nowrap">แพ็กเกจที่พร้อมต่อยอดเป็นระบบค่าบริการ</h2>
+            <h2 className="section-title">แพ็กเกจสำหรับเจ้าของตลาดและทีมบริหาร</h2>
           </div>
 
           {loadingPlans ? <div className="empty-panel">กำลังโหลดข้อมูลแพ็คเกจ...</div> : null}
@@ -847,7 +842,7 @@ export default function App() {
                       </div>
                     ) : null}
                     <div className="mt-6 flex items-end gap-2">
-                      <span className="font-display text-4xl font-semibold text-slate-950">N/A</span>
+                      <span className="font-display text-4xl font-semibold text-slate-950">Free</span>
                     </div>
                     <p className="mt-2 text-sm font-medium text-[var(--color-accent-deep)]">{planPresentation.trialLabel}</p>
                     <div className="mt-5 grid gap-3 rounded-2xl bg-slate-50 p-4 text-sm text-slate-700 sm:grid-cols-2">
@@ -890,7 +885,7 @@ export default function App() {
           <div className="rounded-[2.25rem] bg-white p-7 shadow-[0_28px_90px_rgba(15,23,42,0.1)] lg:p-9">
             <div className="section-heading">
               <p className="section-kicker">FAQ</p>
-              <h2 className="section-title whitespace-nowrap">คำถามที่พบบ่อยเกี่ยวกับระบบจองพื้นที่ขาย</h2>
+              <h2 className="section-title">คำถามที่เจ้าของตลาดและผู้ดูแลตลาดพบบ่อย</h2>
               <p className="section-copy">
                 สรุปคำตอบสำคัญสำหรับเจ้าของตลาดหรือทีมบริหารพื้นที่ขายที่กำลังมองหาระบบจองบูธและจัดการตลาดแบบครบวงจร
               </p>
@@ -913,7 +908,7 @@ export default function App() {
               <p className="section-kicker">Signup</p>
               <h2 className="section-title section-title-light">เริ่ม onboarding องค์กรของคุณได้จากฟอร์มเดียว</h2>
               <p className="mt-5 max-w-xl text-base leading-8 text-slate-300">
-                ช่วงแรกเปิดให้ใช้ฟรี 3 เดือน จึงเก็บเฉพาะข้อมูลองค์กรและผู้ดูแลหลักที่จำเป็น
+                เริ่มจัดการตลาดของคุณโดยกรอกข้อมูลองค์กรและผู้ดูแลหลักที่จำเป็น
                 ระบบจะสร้างองค์กร สิทธิ์ supervisor และ subscription ทดลองใช้ให้พร้อมเข้าใช้งานทันที
               </p>
 
@@ -938,7 +933,7 @@ export default function App() {
                     <p><strong>Organization:</strong> {success.organizationCode}</p>
                     <p><strong>Supervisor:</strong> {success.supervisorUsername}</p>
                     <p><strong>Subscription:</strong> {success.subscriptionCode}</p>
-                    <p><strong>Access:</strong> ฟรี 3 เดือนแรก</p>
+                    <p><strong>Access:</strong> ตามสิทธิ์แพ็กเกจที่สมัคร</p>
                     <p><strong>Trial End:</strong> {new Intl.DateTimeFormat('th-TH', { dateStyle: 'medium' }).format(new Date(success.trialEndsAt))}</p>
                   </div>
                   <button
@@ -1019,7 +1014,7 @@ export default function App() {
 
                   {selectedPlan ? (
                     <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-5 text-sm text-emerald-900">
-                      <p className="font-semibold">ช่วงเปิดตัว: สมัครใช้ฟรี 3 เดือน</p>
+                      <p className="font-semibold">สมัครใช้งานสำหรับองค์กรบริหารตลาด</p>
                       <p className="mt-2">แพ็คเกจที่เลือก: {getPlanPresentation(selectedPlan).name}</p>
                       <p className="mt-1">รอบบิลที่เลือก: {form.preferredBillingInterval === 'yearly' ? 'รายปี พร้อมส่วนลด 15%' : 'รายเดือน'}</p>
                       <p className="mt-1">ระบบจะผูกคำขอสมัครเข้ากับแพ็คเกจที่เลือก เพื่อรองรับการเปิดระบบค่าบริการในอนาคต</p>
